@@ -21,7 +21,7 @@
   "content_scripts": [
     {
       "js": [
-        "src/element-filter.js"
+        "dist/element-filter.js"
       ],
       "matches": [
         "https://play.afreecatv.com/*"
