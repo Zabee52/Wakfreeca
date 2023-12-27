@@ -1,0 +1,24 @@
+{
+  "name": "twiraforming",
+  "version": "1.0.0",
+  "description": "AfreecaTV에서 사용할 유틸리티",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zabee52/Twiraforming.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zabee52/Twiraforming/issues"
+  },
+  "homepage": "https://github.com/Zabee52/Twiraforming#readme",
+  "devDependencies": {
+    "@types/chrome": "^0.0.254",
+    "typescript": "^5.3.3"
+  }
+}
