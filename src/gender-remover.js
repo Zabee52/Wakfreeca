@@ -8,6 +8,9 @@ export default (node) => {
     }
     // 채팅 섹션은 성별 아이콘을 표시하기 위해 왼쪽 패딩을 사용하는데, 이를 제거하기 위한 코드
     node.childNodes.forEach(child => {
+        if (!child.style) {
+            return
+        }
         child.style.paddingLeft = '0'
     })
 }

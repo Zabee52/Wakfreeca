@@ -1,6 +1,7 @@
 import removeIfDonation from './donation-remover.js';
 import removeIfGender from './gender-remover.js';
 import displayChatOneLine from './chat-one-line.js';
+import setChatColor from './chat-color-setter.js';
 
 // TODO: 필터링 목록 선택할 수 있도록 조정
 const targetNode = document.getElementById('chat_area');
@@ -14,6 +15,7 @@ const callback = function (mutationsList, observer) {
         removeIfDonation(node);
         removeIfGender(node);
         displayChatOneLine(node);
+        setChatColor(node);
       });
     }
   }
