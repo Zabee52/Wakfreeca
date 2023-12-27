@@ -1,5 +1,5 @@
 export default (node) => {
-    if (!node.classList) {
+    if (!node?.classList) {
         return
     }
     const removeTargetClassNames = ['balloon_area', 'adballoon_area', 'fanclub']
