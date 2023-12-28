@@ -18,14 +18,31 @@ if (!chatLayerSubMark || !(chatLayerSubMark instanceof HTMLElement)) {
   throw new Error('chat_layer sub mark element not found')
 }
 
-const items = {
-  [ID_CHAT_ONE_LINE]: '채팅 한 줄로 보기',
-  [ID_HIDE_GENDER_ICON]: '성별 표시 가리기',
-  [ID_HIDE_DONATION]: '별풍선 숨기기',
+interface SettingItem {
+  text: string
+  noticeOn: string
+  noticeOff: string
+}
+const items: Record<string, SettingItem>= {
+  [ID_CHAT_ONE_LINE]: {
+    text: '채팅 한 줄로 보기',
+    noticeOn: '지금부터 채팅이 한 줄로 표시됩니다.',
+    noticeOff: '지금부터 채팅이 여러 줄로 표시됩니다.',
+  },
+  [ID_HIDE_GENDER_ICON]: {
+    text: '성별 표시 가리기',
+    noticeOn: '지금부터 성별 아이콘이 표시되지 않습니다.',
+    noticeOff: '지금부터 성별 아이콘이 표시됩니다.',
+  },
+  [ID_HIDE_DONATION]: {
+    text: '후원 메세지 숨기기',
+    noticeOn: '지금부터 후원 메세지가 표시되지 않습니다.',
+    noticeOff: '지금부터 후원 메세지가 표시됩니다.',
+  },
 }
 
 const chatLayerSubMarkUl = chatLayerSubMark.querySelector('ul')
-Object.entries(items).forEach(([id, text]) => {
+Object.entries(items).forEach(([id, {text, noticeOn, noticeOff}]) => {
   const checkboxItem = document.createElement('li')
   const div = document.createElement('div')
   div.className = 'checkbox_wrap'
@@ -45,12 +62,25 @@ Object.entries(items).forEach(([id, text]) => {
   div.appendChild(label)
 
   checkboxItem.appendChild(div)
-  checkboxItem.addEventListener('change', onSettingChange)
+  checkboxItem.addEventListener('change', (event: Event) => onSettingChange(event, noticeOn, noticeOff))
   chatLayerSubMarkUl?.appendChild(checkboxItem)
 })
 
-function onSettingChange(event: Event) {
+function onSettingChange(event: Event, onMsg: string, offMsg: string) {
   const target = event.target as HTMLInputElement
   const { id, checked } = target
   storageLocalBoolean({ key: id, value: checked })
+  noticeSettingChanged(checked ? onMsg : offMsg)
+}
+
+function noticeSettingChanged(msg: string) {
+  const noticeP = document.createElement('p')
+  noticeP.className = 'notice'
+  noticeP.innerText = msg
+  
+  const chatArea = document.getElementById('chat_area')
+  if (!chatArea) {
+    return
+  }
+  chatArea.appendChild(noticeP)
 }
