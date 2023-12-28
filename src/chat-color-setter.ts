@@ -5,12 +5,12 @@ export default (node: HTMLElement) => {
   const userIdNumber = stringToNumber(node.getAttribute('user_id'))
   const nicknameColor = '#' + (userIdNumber % 0xffffff).toString(16).padStart(6, '0')
 
-  const nicknameSectioin = node.querySelector('dt')?.querySelector('a')
-  if (!nicknameSectioin) {
+  const nicknameSection = node.querySelector('dt')?.querySelector('a')
+  if (!nicknameSection) {
     return
   }
 
-  nicknameSectioin.style.color = nicknameColor
+  nicknameSection.style.color = nicknameColor
 }
 
 // stringToNumber - 입력받은 문자열을 char number로 변환
