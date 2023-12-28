@@ -1,3 +1,6 @@
+import { ID_CHAT_ONE_LINE, ID_HIDE_DONATION, ID_HIDE_GENDER_ICON } from './consts'
+import { getStorageLocal, storageLocal } from './storage-util'
+
 const chatLayerSettingNode = document.getElementsByClassName('chat_layer_setting')?.[0]
 if (!chatLayerSettingNode) {
   throw new Error('chat_layer_setting element not found')
@@ -16,9 +19,9 @@ if (!chatLayerSubMark || !(chatLayerSubMark instanceof HTMLElement)) {
 }
 
 const items = {
-  chat_one_line: '채팅 한 줄로 보기',
-  hide_gender_icon: '성별 표시 가리기',
-  hide_donation: '별풍선 숨기기',
+  [ID_CHAT_ONE_LINE]: '채팅 한 줄로 보기',
+  [ID_HIDE_GENDER_ICON]: '성별 표시 가리기',
+  [ID_HIDE_DONATION]: '별풍선 숨기기',
 }
 
 const chatLayerSubMarkUl = chatLayerSubMark.querySelector('ul')
@@ -30,6 +33,9 @@ Object.entries(items).forEach(([id, text]) => {
   const checkbox = document.createElement('input')
   checkbox.type = 'checkbox'
   checkbox.id = id
+  getStorageLocal(id).then((checked) => {
+    checkbox.checked = checked
+  })
 
   const label = document.createElement('label')
   label.htmlFor = id
@@ -39,5 +45,12 @@ Object.entries(items).forEach(([id, text]) => {
   div.appendChild(label)
 
   checkboxItem.appendChild(div)
+  checkboxItem.addEventListener('change', onSettingChange)
   chatLayerSubMarkUl?.appendChild(checkboxItem)
 })
+
+function onSettingChange(event: Event) {
+  const target = event.target as HTMLInputElement
+  const { id, checked } = target
+  storageLocal({ key: id, value: checked })
+}
