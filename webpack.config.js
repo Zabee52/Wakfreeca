@@ -5,6 +5,7 @@ module.exports = {
   entry: {
     'element-filter': './src/element-filter.ts',
     settings: './src/settings.ts',
+    background: './src/background.ts',
   },
   module: {
     rules: [
