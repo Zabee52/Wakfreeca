@@ -3,7 +3,7 @@ import removeIfGender from './gender-remover'
 import displayChatOneLine from './chat-one-line'
 import setChatColor from './chat-color-setter'
 import { MESSAGE_CHAT_ONE_LINE, MESSAGE_HIDE_DONATION, MESSAGE_HIDE_GENDER_ICON } from './consts'
-import { getStorageLocalBoolean } from './storage-util'
+import { getStorageLocalBoolean } from './storage-utils'
 
 // TODO: 필터링 목록 선택할 수 있도록 조정
 const targetNode = document.getElementById('chat_area')
