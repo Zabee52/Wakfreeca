@@ -1,4 +1,4 @@
-export default (node) => {
+export default (node: HTMLElement) => {
   if (!node?.hasAttribute('user_id')) {
     return
   }
@@ -15,7 +15,11 @@ export default (node) => {
 
 // stringToNumber - 입력받은 문자열을 char number로 변환
 // ex) 'abcde' -> 979899100101
-function stringToNumber(str) {
+function stringToNumber(str: string | null) {
+  if (!str) {
+    return 0
+  }
+
   let result = ''
   for (let i = 0; i < str.length; i++) {
     result += str.charCodeAt(i)

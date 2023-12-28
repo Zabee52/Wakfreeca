@@ -20,26 +20,15 @@
   },
   "content_scripts": [
     {
-      "js": [
-        "dist/element-filter.bundle.js"
-      ],
-      "matches": [
-        "https://play.afreecatv.com/*"
-      ]
+      "js": ["dist/element-filter.bundle.js"],
+      "matches": ["https://play.afreecatv.com/*"]
     },
     {
-      "js": [
-        "dist/settings.bundle.js"
-      ],
-      "matches": [
-        "https://play.afreecatv.com/*"
-      ]
+      "js": ["dist/settings.bundle.js"],
+      "matches": ["https://play.afreecatv.com/*"]
     }
   ],
-  "permissions": [
-    "activeTab",
-    "scripting"
-  ],
+  "permissions": ["activeTab", "scripting"],
   "commands": {
     "_execute_action": {
       "suggested_key": {

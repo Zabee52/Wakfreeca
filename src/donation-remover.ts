@@ -1,4 +1,4 @@
-export default (node) => {
+export default (node: HTMLElement) => {
   if (!node?.classList) {
     return
   }

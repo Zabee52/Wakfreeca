@@ -1,4 +1,4 @@
-export default (node) => {
+export default (node: HTMLElement) => {
   if (!node.hasAttribute('user_id')) {
     return
   }
