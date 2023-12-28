@@ -30,5 +30,13 @@ export default (node: HTMLElement) => {
     return
   }
   const chatSectionSpan = elementToSpan(chatSection)
+  chatSectionSpan.style.fontFamily = '"NG", "돋움", "dotum", "AppleGothic"'
+  for (const className of node.classList ?? []) {
+    if (className !== 'bj') {
+      continue
+    }
+    chatSectionSpan.style.fontWeight = 'bold'
+    break
+  }
   chatSection.replaceWith(chatSectionSpan)
 }
