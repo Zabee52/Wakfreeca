@@ -1,5 +1,5 @@
-import { ID_CHAT_ONE_LINE, ID_HIDE_DONATION, ID_HIDE_GENDER_ICON } from './consts'
-import { getStorageLocal, storageLocalBoolean } from './storage-utils'
+import { ID_CHAT_ONE_LINE, ID_HIDE_DONATION, ID_HIDE_GENDER_ICON } from './lib/consts'
+import { getStorageLocal, storageLocalBoolean } from './lib/storage-utils'
 
 const chatLayerSettingNode = document.getElementsByClassName('chat_layer_setting')?.[0]
 if (!chatLayerSettingNode) {

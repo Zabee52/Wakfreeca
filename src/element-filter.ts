@@ -1,9 +1,9 @@
-import removeIfDonation from './donation-remover'
-import removeIfGender from './gender-remover'
-import displayChatOneLine from './chat-one-line'
-import setChatColor from './chat-color-setter'
-import { MESSAGE_CHAT_ONE_LINE, MESSAGE_HIDE_DONATION, MESSAGE_HIDE_GENDER_ICON } from './consts'
-import { getStorageLocalBoolean } from './storage-utils'
+import removeIfDonation from './lib/donation-remover'
+import removeIfGender from './lib/gender-remover'
+import displayChatOneLine from './lib/chat-one-line'
+import setChatColor from './lib/chat-color-setter'
+import { MESSAGE_CHAT_ONE_LINE, MESSAGE_HIDE_DONATION, MESSAGE_HIDE_GENDER_ICON } from './lib/consts'
+import { getStorageLocalBoolean } from './lib/storage-utils'
 
 // TODO: 필터링 목록 선택할 수 있도록 조정
 const targetNode = document.getElementById('chat_area')
