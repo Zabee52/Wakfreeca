@@ -1,11 +1,26 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
-  mode: 'development', // 개발용 설정. 프로덕션의 경우 'production'으로 변경
-  entry: './src/element-filter.js', // 엔트리 파일
+  mode: 'production',
+  entry: {
+    'element-filter': './src/element-filter.ts',
+    settings: './src/settings.ts',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/, // .ts or .tsx
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'] // 해석할 파일 확장자
+  },
   output: {
-    path: path.resolve(__dirname, 'dist'), // 번들 파일을 저장할 경로
-    filename: 'element-filter.js', // 번들 파일 이름
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].bundle.js',
   },
   devtool: 'cheap-module-source-map', // 디버깅용 소스맵
-};
+}
