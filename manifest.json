@@ -21,7 +21,15 @@
   "content_scripts": [
     {
       "js": [
-        "dist/element-filter.js"
+        "dist/element-filter.bundle.js"
+      ],
+      "matches": [
+        "https://play.afreecatv.com/*"
+      ]
+    },
+    {
+      "js": [
+        "dist/settings.bundle.js"
       ],
       "matches": [
         "https://play.afreecatv.com/*"
