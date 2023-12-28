@@ -1,5 +1,5 @@
 import { ID_CHAT_ONE_LINE, ID_HIDE_DONATION, ID_HIDE_GENDER_ICON } from './consts'
-import { getStorageLocal, storageLocal } from './storage-util'
+import { getStorageLocal, storageLocalBoolean } from './storage-util'
 
 const chatLayerSettingNode = document.getElementsByClassName('chat_layer_setting')?.[0]
 if (!chatLayerSettingNode) {
@@ -52,5 +52,5 @@ Object.entries(items).forEach(([id, text]) => {
 function onSettingChange(event: Event) {
   const target = event.target as HTMLInputElement
   const { id, checked } = target
-  storageLocal({ key: id, value: checked })
+  storageLocalBoolean({ key: id, value: checked })
 }

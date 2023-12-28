@@ -3,7 +3,7 @@ import removeIfGender from './gender-remover'
 import displayChatOneLine from './chat-one-line'
 import setChatColor from './chat-color-setter'
 import { MESSAGE_CHAT_ONE_LINE, MESSAGE_HIDE_DONATION, MESSAGE_HIDE_GENDER_ICON } from './consts'
-import { getStorageLocal } from './storage-util'
+import { getStorageLocalBoolean } from './storage-util'
 
 // TODO: 필터링 목록 선택할 수 있도록 조정
 const targetNode = document.getElementById('chat_area')
@@ -18,9 +18,9 @@ let isRemoveIfDonation = false
 let isRemoveIfGender = false
 
 Promise.all([
-  getStorageLocal(MESSAGE_CHAT_ONE_LINE),
-  getStorageLocal(MESSAGE_HIDE_DONATION),
-  getStorageLocal(MESSAGE_HIDE_GENDER_ICON),
+  getStorageLocalBoolean(MESSAGE_CHAT_ONE_LINE),
+  getStorageLocalBoolean(MESSAGE_HIDE_DONATION),
+  getStorageLocalBoolean(MESSAGE_HIDE_GENDER_ICON),
 ])
   .then(([chatOneLineChecked, donationChecked, genderIconChecked]) => {
     isDisplayChatOneLine = chatOneLineChecked

@@ -23,4 +23,10 @@ export default (node: HTMLElement) => {
 
   nicknameSection.insertBefore(wrapSpan, nickname)
   nickname.textContent = ''
+
+  const chatSection = node.querySelector('dd')
+  if (!chatSection) {
+    return
+  }
+  chatSection.style.paddingLeft = '0'
 }
