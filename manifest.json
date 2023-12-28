@@ -28,7 +28,7 @@
       "matches": ["https://play.afreecatv.com/*"]
     }
   ],
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "commands": {
     "_execute_action": {
       "suggested_key": {
