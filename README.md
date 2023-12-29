@@ -18,7 +18,7 @@
 ## 사용 방법
 
 #### 1. 크롬 익스텐션 다운로드
-- [크롬 웹 스토어에서 추가하기](https://developer.chrome.com/docs/webstore/program-policies/permissions?authuser=2&hl=ko)
+- [크롬 웹 스토어에서 추가하기](https://chromewebstore.google.com/u/2/detail/wakfreeca/ppiicfcfonlkjdenhjblpdlniehkpalf?hl=ko)
 <!--
 - 미리 사용해보는 방법
   - Wakfreeca.zip 다운로드 : [링크](https://github.com/Zabee52/Wakfreeca/raw/main/Wakfreeca.zip)
