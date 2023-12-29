@@ -21,6 +21,7 @@
 - 스토어 검수 중........ ✨
 - 미리 사용해보는 방법
   - Wakfreeca.zip 다운로드 : [링크](https://github.com/Zabee52/Wakfreeca/raw/main/Wakfreeca.zip)
+  - 내려받은 파일의 압축을 해제
   - Google chrome
     1. 주소창에 `chrome://extensions/` 를 입력하여 확장 프로그램 관리 탭에 접속
     2. `개발자 모드`를 활성화한 후, `압축 해제된 확장 프로그램을 로드합니다.`를 클릭하여 압축 해제된 Wakfreeca 폴더를 선택
