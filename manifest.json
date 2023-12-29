@@ -27,7 +27,7 @@
       "matches": ["https://play.afreecatv.com/*"]
     }
   ],
-  "permissions": ["tabs", "storage"],
+  "permissions": ["storage"],
   "background": {
     "service_worker": "dist/background.bundle.js"
   }
