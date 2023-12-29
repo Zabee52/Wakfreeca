@@ -6,6 +6,7 @@ import {
   ID_ICON_FEVER_FAN,
   ID_ICON_FAN,
   ID_ICON_QUICK_VIEW,
+  ID_ICON_SUPPORTER,
 } from './consts'
 import { getStorageLocalBoolean } from './storage-utils'
 
@@ -51,6 +52,11 @@ export default (node: HTMLElement) => {
   const subscriberImage = icons.find((icon) => icon.title === '구독팬')
   if (subscriberImage && !iconDisplayMap[ID_ICON_SUBSCRIPTION]) {
     subscriberImage.remove()
+  }
+
+  const supporterImage = icons.find((icon) => icon.title === '서포터')
+  if (supporterImage && !iconDisplayMap[ID_ICON_SUPPORTER]) {
+    supporterImage.remove()
   }
 }
 
