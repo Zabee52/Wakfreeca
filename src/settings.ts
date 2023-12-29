@@ -1,39 +1,79 @@
 import {
   ID_CHAT_LAYER_SET_DISPLAY_DONATION,
-  ID_CHAT_LAYER_SET_ICON,
+  ID_CHAT_LAYER_SET_DISPLAY_ICON,
   ID_CHAT_ONE_LINE,
+  ID_ICON_BJ,
+  ID_ICON_FAN,
+  ID_ICON_FEVER_FAN,
+  ID_ICON_MANAGER,
+  ID_ICON_QUICK_VIEW,
+  ID_ICON_SUBSCRIPTION,
+  ID_PERSONACON_BJ,
+  ID_PERSONACON_NORMAL,
+  ID_PERSONACON_MANAGER,
+  ID_PERSONACON_SUBSCRIPTION,
   ID_SET_NICKNAME_COLOR,
+  ID_CHAT_LAYER_SET_DISPLAY_PERSONACON,
+  ID_PERSONACON_FAN,
+  ID_PERSONACON_FEVER_FAN,
 } from './lib/consts'
 import { SettingItem } from './lib/interfaces'
-import { getStorageLocal, storageLocalBoolean } from './lib/storage-utils'
+import { getStorageLocalBoolean, storageLocalBoolean } from './lib/storage-utils'
 
 const chatLayerSettingNode = document.getElementsByClassName('chat_layer_setting')?.[0]
 if (!chatLayerSettingNode) {
   throw new Error('chat_layer_setting element not found')
 }
 
-const chatLayerSetIconItems: Record<string, SettingItem> = {
-  gender: {
+const chatLayerSetPersonaconItems: Record<string, SettingItem> = {
+  [ID_PERSONACON_BJ]: {
     type: 'checkbox',
-    text: '성별 퍼스나콘',
+    text: 'BJ 퍼스나콘',
   },
-  subscriptionBig: {
+  [ID_PERSONACON_MANAGER]: {
+    type: 'checkbox',
+    text: '매니저 퍼스나콘',
+  },
+  [ID_PERSONACON_SUBSCRIPTION]: {
     type: 'checkbox',
     text: '구독 퍼스나콘',
   },
-  subscriptionSmall: {
+  [ID_PERSONACON_FEVER_FAN]: {
     type: 'checkbox',
-    text: '작은 구독 아이콘',
+    text: '열혈팬 퍼스나콘',
   },
-  feverFan: {
+  [ID_PERSONACON_FAN]: {
+    type: 'checkbox',
+    text: '팬클럽 퍼스나콘',
+  },
+  [ID_PERSONACON_NORMAL]: {
+    type: 'checkbox',
+    text: '성별 퍼스나콘',
+  },
+}
+
+const chatLayerSetIconItems: Record<string, SettingItem> = {
+  [ID_ICON_BJ]: {
+    type: 'checkbox',
+    text: 'BJ 아이콘',
+  },
+  [ID_ICON_MANAGER]: {
+    type: 'checkbox',
+    text: '매니저 아이콘',
+  },
+  [ID_ICON_SUBSCRIPTION]: {
+    type: 'checkbox',
+    text: '구독 아이콘',
+  },
+  [ID_ICON_FEVER_FAN]: {
     type: 'checkbox',
     text: '열혈팬 아이콘',
   },
-  fan: {
+  [ID_ICON_FAN]: {
     type: 'checkbox',
-    text: '팬 아이콘',
+    text: '팬클럽 아이콘',
   },
-  quickView: {
+  [ID_ICON_QUICK_VIEW]: {
     type: 'checkbox',
     text: '퀵뷰 아이콘',
   },
@@ -82,7 +122,11 @@ const chatLayerSubMarkItems: Record<string, SettingItem> = {
     noticeOn: '지금부터 닉네임에 색상이 적용됩니다.',
     noticeOff: '지금부터 닉네임에 색상이 적용되지 않습니다.',
   },
-  [ID_CHAT_LAYER_SET_ICON]: {
+  [ID_CHAT_LAYER_SET_DISPLAY_PERSONACON]: {
+    type: 'chat_layer',
+    text: '퍼스나콘 표시 설정',
+  },
+  [ID_CHAT_LAYER_SET_DISPLAY_ICON]: {
     type: 'chat_layer',
     text: '아이콘 표시 설정',
   },
@@ -119,7 +163,10 @@ Object.entries(chatLayerSubMarkItems)
 
     let items: Record<string, SettingItem> | null = null
     switch (id) {
-      case ID_CHAT_LAYER_SET_ICON:
+      case ID_CHAT_LAYER_SET_DISPLAY_PERSONACON:
+        items = chatLayerSetPersonaconItems
+        break
+      case ID_CHAT_LAYER_SET_DISPLAY_ICON:
         items = chatLayerSetIconItems
         break
       case ID_CHAT_LAYER_SET_DISPLAY_DONATION:
@@ -130,7 +177,7 @@ Object.entries(chatLayerSubMarkItems)
     Object.entries(items ?? {}).forEach(([id, { type, text, noticeOn, noticeOff }]) => {
       switch (type) {
         case 'checkbox':
-          const checkboxItem = createCheckboxItem(id, text, noticeOn, noticeOff)
+          const checkboxItem = createCheckboxItem(id, text, noticeOn, noticeOff, true)
           chatLayerUl?.appendChild(checkboxItem)
           break
         case 'chat_layer':
@@ -215,7 +262,13 @@ function onChatLayerItem(event: Event) {
   closestChatLayer?.classList?.toggle('on')
 }
 
-function createCheckboxItem(id: string, text: string, noticeOn?: string, noticeOff?: string) {
+function createCheckboxItem(
+  id: string,
+  text: string,
+  noticeOn?: string,
+  noticeOff?: string,
+  defaultChecked: boolean = false
+) {
   const checkboxItem = document.createElement('li')
   const div = document.createElement('div')
   div.className = 'checkbox_wrap'
@@ -223,7 +276,7 @@ function createCheckboxItem(id: string, text: string, noticeOn?: string, noticeO
   const checkbox = document.createElement('input')
   checkbox.type = 'checkbox'
   checkbox.id = id
-  getStorageLocal(id).then((checked) => {
+  getStorageLocalBoolean(id, defaultChecked).then((checked) => {
     checkbox.checked = checked
   })
 
