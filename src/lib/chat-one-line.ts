@@ -20,10 +20,10 @@ export default (node: HTMLElement) => {
     return
   }
   // 닉네임에 bold 적용
-  const wrapSpan = document.createElement('span')
-  wrapSpan.textContent = nickname.textContent
-  wrapSpan.style.fontWeight = 'bold'
-  nickname.replaceWith(wrapSpan)
+  const wrapEm = document.createElement('em')
+  wrapEm.textContent = nickname.textContent
+  wrapEm.style.fontWeight = 'bold'
+  nickname.replaceWith(wrapEm)
 
   const chatSection = node.querySelector('dd')
   if (!chatSection) {
@@ -31,6 +31,7 @@ export default (node: HTMLElement) => {
   }
   const chatSectionSpan = elementToSpan(chatSection)
   chatSectionSpan.style.fontFamily = '"NG", "돋움", "dotum", "AppleGothic"'
+  chatSectionSpan.style.fontSize = 'calc( var(--text-default) + var(--text-size) * 2 )'
   for (const className of node.classList ?? []) {
     if (className !== 'bj') {
       continue
