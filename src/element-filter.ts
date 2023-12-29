@@ -1,10 +1,10 @@
-import removeIfDonation from './lib/donation-remover'
+import displayDonation from './lib/display-donation'
 import displayChatOneLine from './lib/chat-one-line'
-import setChatColor from './lib/chat-color-setter'
-import { MESSAGE_CHAT_ONE_LINE, MESSAGE_HIDE_DONATION, MESSAGE_SET_NICKNAME_COLOR } from './lib/consts'
-import { getStorageLocalBoolean } from './lib/storage-utils'
 import displayPersonacon from './lib/display-personacon'
 import displayIcon from './lib/display-icon'
+import setChatColor from './lib/chat-color-setter'
+import { MESSAGE_CHAT_ONE_LINE, MESSAGE_SET_NICKNAME_COLOR } from './lib/consts'
+import { getStorageLocalBoolean } from './lib/storage-utils'
 
 // TODO: 필터링 목록 선택할 수 있도록 조정
 const targetNode = document.getElementById('chat_area')
@@ -16,16 +16,10 @@ const observerConfig = { attributes: false, childList: true, subtree: true }
 
 let isDisplayChatOneLine = false
 let isSetNicknameColor = false
-let isRemoveIfDonation = false
 
-Promise.all([
-  getStorageLocalBoolean(MESSAGE_CHAT_ONE_LINE),
-  getStorageLocalBoolean(MESSAGE_HIDE_DONATION),
-  getStorageLocalBoolean(MESSAGE_SET_NICKNAME_COLOR),
-])
-  .then(([chatOneLineChecked, donationChecked, setNicknameColorChecked]) => {
+Promise.all([getStorageLocalBoolean(MESSAGE_CHAT_ONE_LINE), getStorageLocalBoolean(MESSAGE_SET_NICKNAME_COLOR)])
+  .then(([chatOneLineChecked, setNicknameColorChecked]) => {
     isDisplayChatOneLine = chatOneLineChecked
-    isRemoveIfDonation = donationChecked
     isSetNicknameColor = setNicknameColorChecked
   })
   .catch((error) => {
@@ -39,7 +33,7 @@ const callback = function (mutationsList: MutationRecord[], observer: MutationOb
         if (!(node instanceof HTMLElement)) {
           return
         }
-        isRemoveIfDonation && removeIfDonation(node)
+        displayDonation(node)
         displayPersonacon(node)
         displayIcon(node)
         isDisplayChatOneLine && displayChatOneLine(node)
@@ -65,8 +59,5 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
   }
   if (changes[MESSAGE_SET_NICKNAME_COLOR]) {
     isSetNicknameColor = changes[MESSAGE_SET_NICKNAME_COLOR].newValue
-  }
-  if (changes[MESSAGE_HIDE_DONATION]) {
-    isRemoveIfDonation = changes[MESSAGE_HIDE_DONATION].newValue
   }
 })

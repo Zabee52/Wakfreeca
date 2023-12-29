@@ -16,6 +16,10 @@ import {
   ID_CHAT_LAYER_SET_DISPLAY_PERSONACON,
   ID_PERSONACON_FAN,
   ID_PERSONACON_FEVER_FAN,
+  ID_DONATION_AD_BALLOON,
+  ID_DONATION_BALLOON,
+  ID_DONATION_STICKER,
+  ID_ICON_SUPPORTER,
 } from './lib/consts'
 import { SettingItem } from './lib/interfaces'
 import { getStorageLocalBoolean, storageLocalBoolean } from './lib/storage-utils'
@@ -36,7 +40,7 @@ const chatLayerSetPersonaconItems: Record<string, SettingItem> = {
   },
   [ID_PERSONACON_SUBSCRIPTION]: {
     type: 'checkbox',
-    text: '구독 퍼스나콘',
+    text: '구독자 퍼스나콘',
   },
   [ID_PERSONACON_FEVER_FAN]: {
     type: 'checkbox',
@@ -63,7 +67,7 @@ const chatLayerSetIconItems: Record<string, SettingItem> = {
   },
   [ID_ICON_SUBSCRIPTION]: {
     type: 'checkbox',
-    text: '구독 아이콘',
+    text: '구독자 아이콘',
   },
   [ID_ICON_FEVER_FAN]: {
     type: 'checkbox',
@@ -73,6 +77,10 @@ const chatLayerSetIconItems: Record<string, SettingItem> = {
     type: 'checkbox',
     text: '팬클럽 아이콘',
   },
+  [ID_ICON_SUPPORTER]: {
+    type: 'checkbox',
+    text: '서포터 아이콘',
+  },
   [ID_ICON_QUICK_VIEW]: {
     type: 'checkbox',
     text: '퀵뷰 아이콘',
@@ -80,21 +88,17 @@ const chatLayerSetIconItems: Record<string, SettingItem> = {
 }
 
 const chatLayerSetDisplayDonationItems: Record<string, SettingItem> = {
-  baloon: {
+  [ID_DONATION_BALLOON]: {
     type: 'checkbox',
-    text: '별풍선',
+    text: '별풍선 / 구독',
   },
-  adBaloon: {
+  [ID_DONATION_AD_BALLOON]: {
     type: 'checkbox',
     text: '애드벌룬',
   },
-  sticker: {
+  [ID_DONATION_STICKER]: {
     type: 'checkbox',
     text: '스티커',
-  },
-  chocolate: {
-    type: 'checkbox',
-    text: '초콜릿',
   },
 }
 
@@ -203,6 +207,17 @@ function onAreaHeaderClick(event: Event, prevNode: HTMLElement) {
   chatLayer?.classList?.toggle('on')
 }
 
+function onCloseButtonClick(event: Event) {
+  const target = event.target as HTMLElement
+  const close = target.classList.contains('close')
+  if (!close) {
+    return
+  }
+
+  const chatLayer = target.closest('.chat_layer')
+  chatLayer?.classList?.toggle('on')
+}
+
 function createChatLayer(id: string, title: string, prevNode: HTMLElement) {
   const areaHeader = document.createElement('div')
   areaHeader.classList.add('area_header')
@@ -226,12 +241,19 @@ function createChatLayer(id: string, title: string, prevNode: HTMLElement) {
   const contentsUl = document.createElement('ul')
   contents.appendChild(contentsUl)
 
+  const closeBtn = document.createElement('a')
+  closeBtn.href = 'javascript:;'
+  closeBtn.classList.add('close')
+  closeBtn.innerText = '닫기'
+  closeBtn.addEventListener('click', (event: Event) => onCloseButtonClick(event))
+
   const chatLayer = document.createElement('div')
   chatLayer.classList.add('chat_layer')
   chatLayer.classList.add('sub')
   chatLayer.classList.add(id)
   chatLayer.appendChild(areaHeader)
   chatLayer.appendChild(contents)
+  chatLayer.appendChild(closeBtn)
   return chatLayer
 }
 
