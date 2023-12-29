@@ -2,7 +2,12 @@ import removeIfDonation from './lib/donation-remover'
 import removeIfGender from './lib/gender-remover'
 import displayChatOneLine from './lib/chat-one-line'
 import setChatColor from './lib/chat-color-setter'
-import { MESSAGE_CHAT_ONE_LINE, MESSAGE_HIDE_DONATION, MESSAGE_HIDE_GENDER_ICON } from './lib/consts'
+import {
+  MESSAGE_CHAT_ONE_LINE,
+  MESSAGE_HIDE_DONATION,
+  MESSAGE_HIDE_GENDER_ICON,
+  MESSAGE_SET_NICKNAME_COLOR,
+} from './lib/consts'
 import { getStorageLocalBoolean } from './lib/storage-utils'
 
 // TODO: 필터링 목록 선택할 수 있도록 조정
@@ -14,6 +19,7 @@ if (!targetNode) {
 const observerConfig = { attributes: false, childList: true, subtree: true }
 
 let isDisplayChatOneLine = false
+let isSetNicknameColor = false
 let isRemoveIfDonation = false
 let isRemoveIfGender = false
 
@@ -21,11 +27,13 @@ Promise.all([
   getStorageLocalBoolean(MESSAGE_CHAT_ONE_LINE),
   getStorageLocalBoolean(MESSAGE_HIDE_DONATION),
   getStorageLocalBoolean(MESSAGE_HIDE_GENDER_ICON),
+  getStorageLocalBoolean(MESSAGE_SET_NICKNAME_COLOR),
 ])
-  .then(([chatOneLineChecked, donationChecked, genderIconChecked]) => {
+  .then(([chatOneLineChecked, donationChecked, genderIconChecked, setNicknameColorChecked]) => {
     isDisplayChatOneLine = chatOneLineChecked
     isRemoveIfDonation = donationChecked
     isRemoveIfGender = genderIconChecked
+    isSetNicknameColor = setNicknameColorChecked
   })
   .catch((error) => {
     console.error('😞 스토리지에서 설정을 불러오는 데 실패했습니다:', error)
@@ -38,16 +46,10 @@ const callback = function (mutationsList: MutationRecord[], observer: MutationOb
         if (!(node instanceof HTMLElement)) {
           return
         }
-        if (isRemoveIfDonation) {
-          removeIfDonation(node)
-        }
-        if (isRemoveIfGender) {
-          removeIfGender(node)
-        }
-        if (isDisplayChatOneLine) {
-          displayChatOneLine(node)
-          setChatColor(node)
-        }
+        isRemoveIfDonation && removeIfDonation(node)
+        isRemoveIfGender && removeIfGender(node)
+        isDisplayChatOneLine && displayChatOneLine(node)
+        isSetNicknameColor && setChatColor(node)
       })
     }
   }
@@ -66,6 +68,9 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
   }
   if (changes[MESSAGE_CHAT_ONE_LINE]) {
     isDisplayChatOneLine = changes[MESSAGE_CHAT_ONE_LINE].newValue
+  }
+  if (changes[MESSAGE_SET_NICKNAME_COLOR]) {
+    isSetNicknameColor = changes[MESSAGE_SET_NICKNAME_COLOR].newValue
   }
   if (changes[MESSAGE_HIDE_DONATION]) {
     isRemoveIfDonation = changes[MESSAGE_HIDE_DONATION].newValue
