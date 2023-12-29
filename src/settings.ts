@@ -1,4 +1,4 @@
-import { ID_CHAT_ONE_LINE, ID_HIDE_DONATION, ID_HIDE_GENDER_ICON } from './lib/consts'
+import { ID_CHAT_ONE_LINE, ID_HIDE_DONATION, ID_HIDE_GENDER_ICON, ID_SET_NICKNAME_COLOR } from './lib/consts'
 import { SettingItem } from './lib/interfaces'
 import { getStorageLocal, storageLocalBoolean } from './lib/storage-utils'
 
@@ -24,6 +24,11 @@ const items: Record<string, SettingItem>= {
     text: '채팅 한 줄로 보기',
     noticeOn: '지금부터 채팅이 한 줄로 표시됩니다.',
     noticeOff: '지금부터 채팅이 여러 줄로 표시됩니다.',
+  },
+  [ID_SET_NICKNAME_COLOR]: {
+    text: '닉네임에 랜덤 색상 적용',
+    noticeOn: '지금부터 닉네임에 색상이 적용됩니다.',
+    noticeOff: '지금부터 닉네임에 색상이 적용되지 않습니다.',
   },
   [ID_HIDE_GENDER_ICON]: {
     text: '성별 표시 가리기',
