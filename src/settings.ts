@@ -1,4 +1,5 @@
 import { ID_CHAT_ONE_LINE, ID_HIDE_DONATION, ID_HIDE_GENDER_ICON } from './lib/consts'
+import { SettingItem } from './lib/interfaces'
 import { getStorageLocal, storageLocalBoolean } from './lib/storage-utils'
 
 const chatLayerSettingNode = document.getElementsByClassName('chat_layer_setting')?.[0]
@@ -18,11 +19,6 @@ if (!chatLayerSubMark || !(chatLayerSubMark instanceof HTMLElement)) {
   throw new Error('chat_layer sub mark element not found')
 }
 
-interface SettingItem {
-  text: string
-  noticeOn: string
-  noticeOff: string
-}
 const items: Record<string, SettingItem>= {
   [ID_CHAT_ONE_LINE]: {
     text: '채팅 한 줄로 보기',
