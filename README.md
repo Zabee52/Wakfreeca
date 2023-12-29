@@ -18,7 +18,8 @@
 ## 사용 방법
 
 #### 1. 크롬 익스텐션 다운로드
-- 스토어 검수 중........ ✨
+- [크롬 웹 스토어에서 추가하기](https://developer.chrome.com/docs/webstore/program-policies/permissions?authuser=2&hl=ko)
+<!--
 - 미리 사용해보는 방법
   - Wakfreeca.zip 다운로드 : [링크](https://github.com/Zabee52/Wakfreeca/raw/main/Wakfreeca.zip)
   - 내려받은 파일의 압축을 해제
@@ -28,7 +29,7 @@
       ![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/e75ba036-ecda-4293-b851-264e66e77a28)
     3. 활성화 완료! 🥳
       ![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/33041871-902c-4ee3-9508-67466792ac6c)
-
+-->
 
 #### 2. 채팅 레이아웃 설정
 ![image](https://github.com/Zabee52/Twiraforming/assets/93498724/e59f6831-04ac-4c1a-b610-8bb185fd4e1c)
