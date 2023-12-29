@@ -1,10 +1,61 @@
-import { ID_CHAT_ONE_LINE, ID_HIDE_DONATION, ID_HIDE_GENDER_ICON, ID_SET_NICKNAME_COLOR } from './lib/consts'
+import {
+  ID_CHAT_LAYER_SET_DISPLAY_DONATION,
+  ID_CHAT_LAYER_SET_ICON,
+  ID_CHAT_ONE_LINE,
+  ID_SET_NICKNAME_COLOR,
+} from './lib/consts'
 import { SettingItem } from './lib/interfaces'
 import { getStorageLocal, storageLocalBoolean } from './lib/storage-utils'
 
 const chatLayerSettingNode = document.getElementsByClassName('chat_layer_setting')?.[0]
 if (!chatLayerSettingNode) {
   throw new Error('chat_layer_setting element not found')
+}
+
+const chatLayerSetIconItems: Record<string, SettingItem> = {
+  gender: {
+    type: 'checkbox',
+    text: '성별 퍼스나콘',
+  },
+  subscriptionBig: {
+    type: 'checkbox',
+    text: '구독 퍼스나콘',
+  },
+  subscriptionSmall: {
+    type: 'checkbox',
+    text: '작은 구독 아이콘',
+  },
+  feverFan: {
+    type: 'checkbox',
+    text: '열혈팬 아이콘',
+  },
+  fan: {
+    type: 'checkbox',
+    text: '팬 아이콘',
+  },
+  quickView: {
+    type: 'checkbox',
+    text: '퀵뷰 아이콘',
+  },
+}
+
+const chatLayerSetDisplayDonationItems: Record<string, SettingItem> = {
+  baloon: {
+    type: 'checkbox',
+    text: '별풍선',
+  },
+  adBaloon: {
+    type: 'checkbox',
+    text: '애드벌룬',
+  },
+  sticker: {
+    type: 'checkbox',
+    text: '스티커',
+  },
+  chocolate: {
+    type: 'checkbox',
+    text: '초콜릿',
+  },
 }
 
 const chatLayerSubMark = [...(chatLayerSettingNode.childNodes ?? [])].find(
@@ -14,36 +65,157 @@ const chatLayerSubMark = [...(chatLayerSettingNode.childNodes ?? [])].find(
     child.classList?.contains('sub') &&
     child.classList?.contains('mark')
 )
-
-if (!chatLayerSubMark || !(chatLayerSubMark instanceof HTMLElement)) {
+if (!(chatLayerSubMark instanceof HTMLElement)) {
   throw new Error('chat_layer sub mark element not found')
 }
 
-const items: Record<string, SettingItem>= {
+const chatLayerSubMarkItems: Record<string, SettingItem> = {
   [ID_CHAT_ONE_LINE]: {
+    type: 'checkbox',
     text: '채팅 한 줄로 보기',
     noticeOn: '지금부터 채팅이 한 줄로 표시됩니다.',
     noticeOff: '지금부터 채팅이 여러 줄로 표시됩니다.',
   },
   [ID_SET_NICKNAME_COLOR]: {
+    type: 'checkbox',
     text: '닉네임에 랜덤 색상 적용',
     noticeOn: '지금부터 닉네임에 색상이 적용됩니다.',
     noticeOff: '지금부터 닉네임에 색상이 적용되지 않습니다.',
   },
-  [ID_HIDE_GENDER_ICON]: {
-    text: '성별 표시 가리기',
-    noticeOn: '지금부터 성별 아이콘이 표시되지 않습니다.',
-    noticeOff: '지금부터 성별 아이콘이 표시됩니다.',
+  [ID_CHAT_LAYER_SET_ICON]: {
+    type: 'chat_layer',
+    text: '아이콘 표시 설정',
   },
-  [ID_HIDE_DONATION]: {
-    text: '후원 메세지 숨기기',
-    noticeOn: '지금부터 후원 메세지가 표시되지 않습니다.',
-    noticeOff: '지금부터 후원 메세지가 표시됩니다.',
+  [ID_CHAT_LAYER_SET_DISPLAY_DONATION]: {
+    type: 'chat_layer',
+    text: '후원 메세지 표시 설정',
   },
 }
 
 const chatLayerSubMarkUl = chatLayerSubMark.querySelector('ul')
-Object.entries(items).forEach(([id, {text, noticeOn, noticeOff}]) => {
+
+// TODO: 아래 코드와 책임 겹치는지 확인 후 필요 시 중복 제거
+Object.entries(chatLayerSubMarkItems).forEach(([id, { type, text, noticeOn, noticeOff }]) => {
+  switch (type) {
+    case 'checkbox':
+      const checkboxItem = createCheckboxItem(id, text, noticeOn, noticeOff)
+      chatLayerSubMarkUl?.appendChild(checkboxItem)
+      break
+    case 'chat_layer':
+      const chatLayerItem = createChatLayerItem(id, text)
+      chatLayerSubMarkUl?.appendChild(chatLayerItem)
+      break
+  }
+})
+
+Object.entries(chatLayerSubMarkItems)
+  .filter(([_, { type }]) => type === 'chat_layer')
+  .forEach(([id, { text }]) => {
+    const chatLayer = createChatLayer(id, text, chatLayerSubMark)
+    const chatLayerUl = chatLayer.querySelector('ul')
+    if (!chatLayerUl) {
+      return
+    }
+
+    let items: Record<string, SettingItem> | null = null
+    switch (id) {
+      case ID_CHAT_LAYER_SET_ICON:
+        items = chatLayerSetIconItems
+        break
+      case ID_CHAT_LAYER_SET_DISPLAY_DONATION:
+        items = chatLayerSetDisplayDonationItems
+        break
+    }
+
+    Object.entries(items ?? {}).forEach(([id, { type, text, noticeOn, noticeOff }]) => {
+      switch (type) {
+        case 'checkbox':
+          const checkboxItem = createCheckboxItem(id, text, noticeOn, noticeOff)
+          chatLayerUl?.appendChild(checkboxItem)
+          break
+        case 'chat_layer':
+          const chatLayerItem = createChatLayerItem(id, text)
+          chatLayerUl?.appendChild(chatLayerItem)
+          break
+      }
+    })
+
+    chatLayerSettingNode.appendChild(chatLayer)
+  })
+
+function onAreaHeaderClick(event: Event, prevNode: HTMLElement) {
+  const target = event.target as HTMLElement
+  const historyBack = target.classList.contains('history_back')
+  if (!historyBack) {
+    return
+  }
+
+  prevNode?.classList?.toggle('on')
+
+  const chatLayer = target.closest('.chat_layer')
+  chatLayer?.classList?.toggle('on')
+}
+
+function createChatLayer(id: string, title: string, prevNode: HTMLElement) {
+  const areaHeader = document.createElement('div')
+  areaHeader.classList.add('area_header')
+  areaHeader.addEventListener('click', (event: Event) => onAreaHeaderClick(event, prevNode))
+
+  const historyBack = document.createElement('a')
+  historyBack.href = 'javascript:;'
+  historyBack.classList.add('history_back')
+  historyBack.innerText = '뒤로가기'
+  areaHeader.appendChild(historyBack)
+
+  const areaHeaderTitleSpan = document.createElement('span')
+  areaHeaderTitleSpan.innerText = title
+  const areaHeaderTitle = document.createElement('h2')
+  areaHeaderTitle.appendChild(areaHeaderTitleSpan)
+  areaHeader.appendChild(areaHeaderTitle)
+
+  const contents = document.createElement('div')
+  contents.classList.add('contents')
+
+  const contentsUl = document.createElement('ul')
+  contents.appendChild(contentsUl)
+
+  const chatLayer = document.createElement('div')
+  chatLayer.classList.add('chat_layer')
+  chatLayer.classList.add('sub')
+  chatLayer.classList.add(id)
+  chatLayer.appendChild(areaHeader)
+  chatLayer.appendChild(contents)
+  return chatLayer
+}
+
+function createChatLayerItem(id: string, title: string) {
+  const chatLayerItem = document.createElement('li')
+  const a = document.createElement('a')
+  a.href = 'javascript:;'
+  a.className = 'more_layer'
+  a.dataset.title = id
+  a.innerText = title
+
+  chatLayerItem.appendChild(a)
+  chatLayerItem.addEventListener('click', onChatLayerItem)
+  return chatLayerItem
+}
+
+function onChatLayerItem(event: Event) {
+  const target = event.target as HTMLAnchorElement
+  const { title } = target.dataset
+  if (!title) {
+    return
+  }
+
+  const targetChatLayer = document.querySelector(`.${title}`)
+  targetChatLayer?.classList?.toggle('on')
+
+  const closestChatLayer = target.closest('.chat_layer')
+  closestChatLayer?.classList?.toggle('on')
+}
+
+function createCheckboxItem(id: string, text: string, noticeOn?: string, noticeOff?: string) {
   const checkboxItem = document.createElement('li')
   const div = document.createElement('div')
   div.className = 'checkbox_wrap'
@@ -63,22 +235,26 @@ Object.entries(items).forEach(([id, {text, noticeOn, noticeOff}]) => {
   div.appendChild(label)
 
   checkboxItem.appendChild(div)
-  checkboxItem.addEventListener('change', (event: Event) => onSettingChange(event, noticeOn, noticeOff))
-  chatLayerSubMarkUl?.appendChild(checkboxItem)
-})
+  checkboxItem.addEventListener('change', (event: Event) => onCheckboxItem(event, noticeOn, noticeOff))
+  return checkboxItem
+}
 
-function onSettingChange(event: Event, onMsg: string, offMsg: string) {
+function onCheckboxItem(event: Event, onMsg?: string, offMsg?: string) {
   const target = event.target as HTMLInputElement
   const { id, checked } = target
   storageLocalBoolean({ key: id, value: checked })
-  noticeSettingChanged(checked ? onMsg : offMsg)
+  const msg = checked ? onMsg : offMsg
+  if (!msg) {
+    return
+  }
+  noticeSettingChanged(msg)
 }
 
 function noticeSettingChanged(msg: string) {
   const noticeP = document.createElement('p')
   noticeP.className = 'notice'
   noticeP.innerText = msg
-  
+
   const chatArea = document.getElementById('chat_area')
   if (!chatArea) {
     return
