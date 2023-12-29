@@ -1,9 +1,11 @@
+import { getBrightnessAdjustedHex } from './color-utils'
+
 export default (node: HTMLElement) => {
   if (!node?.hasAttribute('user_id')) {
     return
   }
-  const userIdNumber = stringToNumber(node.getAttribute('user_id'))
-  const nicknameColor = '#' + (userIdNumber % 0xffffff).toString(16).padStart(6, '0')
+  const userIdHex = userIdToHex(node.getAttribute('user_id') || '000000')
+  const nicknameColor = '#' + getBrightnessAdjustedHex(userIdHex)
 
   const nicknameSection = node.querySelector('dt')?.querySelector('a')
   if (!nicknameSection) {
@@ -25,4 +27,13 @@ function stringToNumber(str: string | null) {
     result += str.charCodeAt(i)
   }
   return parseInt(result)
+}
+
+function numberToHex(number: number) {
+  return number.toString(16).padStart(6, '0')
+}
+
+function userIdToHex(userId: string) {
+  const userIdNumber = stringToNumber(userId)
+  return numberToHex(userIdNumber)
 }

@@ -20,6 +20,7 @@ export default (node: HTMLElement) => {
     return
   }
   // 닉네임에 bold 적용
+  // em 태그로 생성하는 이유는 기존 afreecaTV의 스타일을 상속받기 위해
   const wrapEm = document.createElement('em')
   wrapEm.textContent = nickname.textContent
   wrapEm.style.fontWeight = 'bold'
@@ -32,6 +33,7 @@ export default (node: HTMLElement) => {
   const chatSectionSpan = elementToSpan(chatSection)
   chatSectionSpan.style.fontFamily = '"NG", "돋움", "dotum", "AppleGothic"'
   chatSectionSpan.style.fontSize = 'calc( var(--text-default) + var(--text-size) * 2 )'
+  chatSectionSpan.style.marginLeft = '2px'
   for (const className of node.classList ?? []) {
     if (className !== 'bj') {
       continue
