@@ -334,5 +334,7 @@ function noticeSettingChanged(msg: string) {
   if (!chatArea) {
     return
   }
-  chatArea.appendChild(noticeP)
+  // 채팅창이 얼어있을 경우 .box_ice element 아래에 채팅 및 알림이 추가되며, 그렇지 않을 경우 .chat_area element 아래에 추가됨
+  const icedArea = chatArea.querySelector('.box_ice:last-child')
+  !!icedArea ? icedArea.appendChild(noticeP) : chatArea.appendChild(noticeP)
 }
