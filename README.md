@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://github.com/Zabee52/Twiraforming/assets/93498724/97d139c0-aeaa-43c3-96ca-6b43925ba9da" height="96">
-  <h3 align="center">Wafreeca</h3>
+  <h3 align="center">Wakfreeca</h3>
 </p>
 
 <p align="center">
