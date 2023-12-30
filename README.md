@@ -34,7 +34,7 @@
 #### 2. 채팅 레이아웃 설정
 ![image](https://github.com/Zabee52/Twiraforming/assets/93498724/e59f6831-04ac-4c1a-b610-8bb185fd4e1c)
 ![image](https://github.com/Zabee52/Twiraforming/assets/93498724/7a4ecb4b-d34c-4257-917e-a1e20a308433)
-![image](https://github.com/Zabee52/Twiraforming/assets/93498724/223621f0-ca5a-4710-a8ea-b8ccfaa599ad)
+![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/4db2accf-5713-41e0-88c6-4700def8f181)
 
 
 ## 기술의 범위
