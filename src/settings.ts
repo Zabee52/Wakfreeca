@@ -20,6 +20,11 @@ import {
   ID_DONATION_BALLOON,
   ID_DONATION_STICKER,
   ID_ICON_SUPPORTER,
+  ID_CHAT_LAYER_SET_DISPLAY_NOTICE,
+  ID_NOTICE_HOTFAN_IN,
+  ID_NOTICE_HOTFAN,
+  ID_NOTICE_FAN,
+  ID_NOTICE_SUPPORTER,
 } from './lib/consts'
 import { SettingItem } from './lib/interfaces'
 import { getStorageLocalBoolean, storageLocalBoolean } from './lib/storage-utils'
@@ -102,6 +107,25 @@ const chatLayerSetDisplayDonationItems: Record<string, SettingItem> = {
   },
 }
 
+const chatLayerSetNoticeItems: Record<string, SettingItem> = {
+  [ID_NOTICE_HOTFAN_IN]: {
+    type: 'checkbox',
+    text: '열혈팬 입장 알림',
+  },
+  [ID_NOTICE_HOTFAN]: {
+    type: 'checkbox',
+    text: '열혈팬 탄생 알림',
+  },
+  [ID_NOTICE_FAN]: {
+    type: 'checkbox',
+    text: '팬클럽 가입 알림',
+  },
+  [ID_NOTICE_SUPPORTER]: {
+    type: 'checkbox',
+    text: '서포터 가입 알림',
+  },
+}
+
 const chatLayerSubMark = [...(chatLayerSettingNode.childNodes ?? [])].find(
   (child) =>
     child instanceof HTMLElement &&
@@ -137,6 +161,10 @@ const chatLayerSubMarkItems: Record<string, SettingItem> = {
   [ID_CHAT_LAYER_SET_DISPLAY_DONATION]: {
     type: 'chat_layer',
     text: '후원 메세지 표시 설정',
+  },
+  [ID_CHAT_LAYER_SET_DISPLAY_NOTICE]: {
+    type: 'chat_layer',
+    text: '채팅 안내 설정',
   },
 }
 
@@ -175,6 +203,9 @@ Object.entries(chatLayerSubMarkItems)
         break
       case ID_CHAT_LAYER_SET_DISPLAY_DONATION:
         items = chatLayerSetDisplayDonationItems
+        break
+      case ID_CHAT_LAYER_SET_DISPLAY_NOTICE:
+        items = chatLayerSetNoticeItems
         break
     }
 

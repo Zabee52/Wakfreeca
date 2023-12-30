@@ -18,23 +18,20 @@ export default (node: HTMLElement) => {
     return
   }
 
-  let needRemove = false
-
-  const isBalloon = ['balloon_area', 'fanclub'].some((className) => node.classList.contains(className))
+  const isBalloon = node.classList.contains('balloon_area')
   if (isBalloon && !donationDisplayMap[ID_DONATION_BALLOON]) {
-    needRemove = true
-  }
-  const isAdballon = ['adballoon_area', 'fanclub'].some((className) => node.classList.contains(className))
-  if (isAdballon && !donationDisplayMap[ID_DONATION_AD_BALLOON]) {
-    needRemove = true
-  }
-  const isSticker = ['sticker_area', 'support'].some((className) => node.classList.contains(className))
-  if (isSticker && !donationDisplayMap[ID_DONATION_STICKER]) {
-    needRemove = true
-  }
-
-  if (needRemove) {
     node.remove()
+    return
+  }
+  const isAdballon = node.classList.contains('adballoon_area')
+  if (isAdballon && !donationDisplayMap[ID_DONATION_AD_BALLOON]) {
+    node.remove()
+    return
+  }
+  const isSticker = node.classList.contains('sticker_area')
+  if (isSticker && !donationDisplayMap[ID_DONATION_STICKER]) {
+    node.remove()
+    return
   }
 }
 
