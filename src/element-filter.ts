@@ -34,15 +34,40 @@ const callback = function (mutationsList: MutationRecord[], observer: MutationOb
         if (!(node instanceof HTMLElement)) {
           return
         }
-        displayDonation(node)
-        displayPersonacon(node)
-        displayIcon(node)
-        displayNotice(node)
-        isDisplayChatOneLine && displayChatOneLine(node)
-        isSetNicknameColor && setChatColor(node)
+
+        if (isChat(node)) {
+          displayPersonacon(node)
+          displayIcon(node)
+          isDisplayChatOneLine && displayChatOneLine(node)
+          isSetNicknameColor && setChatColor(node)
+        }
+
+        if (isDonation(node)) {
+          displayDonation(node)
+        }
+
+        if (isNotice(node)) {
+          displayNotice(node)
+        }
       })
     }
   }
+}
+
+function isChat(node: HTMLElement) {
+  return node.hasAttribute?.('user_id') && !isDonation(node) && !isNotice(node)
+}
+
+function isDonation(node: HTMLElement) {
+  return (
+    node.classList?.contains('balloon_area') ||
+    node.classList?.contains('adballoon_area') ||
+    node.classList?.contains('sticker_area')
+  )
+}
+
+function isNotice(node: HTMLElement) {
+  return node.classList?.contains('notice')
 }
 
 // 옵저버 인스턴스 생성
