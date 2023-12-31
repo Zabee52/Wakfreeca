@@ -14,10 +14,6 @@ CHAT_LAYER_SET_DISPLAY_DONATION_MESSAGES.forEach((message) => {
 })
 
 export default (node: HTMLElement) => {
-  if (!node?.classList?.length) {
-    return
-  }
-
   const isBalloon = node.classList.contains('balloon_area')
   if (isBalloon && !donationDisplayMap[ID_DONATION_BALLOON]) {
     node.remove()

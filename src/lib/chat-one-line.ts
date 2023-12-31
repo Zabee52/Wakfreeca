@@ -1,9 +1,6 @@
 import { elementToSpan } from './dom-utils'
 
 export default (node: HTMLElement) => {
-  if (!node.hasAttribute('user_id')) {
-    return
-  }
   node.style.paddingTop = '2px'
   node.style.paddingBottom = '2px'
 

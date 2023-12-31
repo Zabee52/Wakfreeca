@@ -1,9 +1,6 @@
 import { getBrightnessAdjustedHex } from './color-utils'
 
 export default (node: HTMLElement) => {
-  if (!node?.hasAttribute('user_id')) {
-    return
-  }
   const userIdHex = userIdToHex(node.getAttribute('user_id') || '000000')
   const nicknameColor = '#' + getBrightnessAdjustedHex(userIdHex)
 

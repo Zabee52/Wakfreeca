@@ -15,10 +15,6 @@ CHAT_LAYER_SET_DISPLAY_NOTICE_MESSAGES.forEach((message) => {
 })
 
 export default (node: HTMLElement) => {
-  if (!node?.classList?.contains('notice')) {
-    return
-  }
-
   const isHotFanIn = ['hotfan', 'in'].every((className) => node.classList.contains(className))
   if (isHotFanIn && !noticeDisplayMap[ID_NOTICE_HOTFAN_IN]) {
     node.remove()

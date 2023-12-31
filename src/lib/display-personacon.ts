@@ -17,10 +17,6 @@ CHAT_LAYER_SET_DISPLAY_PERSONACON_MESSAGES.forEach((message) => {
 })
 
 export default (node: HTMLElement) => {
-  if (!node.hasAttribute('user_id')) {
-    return
-  }
-
   // iconType은 dt의 classList지만, 아프리카TV에서는 이 정보를 표시할 퍼스나콘 타입을 정의하는데 사용 하고 있음
   const iconType = node.querySelector('dt')?.classList
   const personacon = node.querySelector('em')
