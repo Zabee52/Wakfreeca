@@ -57,7 +57,7 @@ const chatLayerSetPersonaconItems: Record<string, SettingItem> = {
   },
   [ID_PERSONACON_NORMAL]: {
     type: 'checkbox',
-    text: '성별 퍼스나콘',
+    text: '일반 사용자 퍼스나콘',
   },
 }
 
