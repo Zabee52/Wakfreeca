@@ -6,6 +6,7 @@ module.exports = {
     'element-filter': './src/element-filter.ts',
     settings: './src/settings.ts',
     background: './src/background.ts',
+    'move-layer': './src/move-layer.ts',
   },
   module: {
     rules: [

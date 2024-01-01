@@ -4,6 +4,7 @@ import displayPersonacon from './lib/display-personacon'
 import displayIcon from './lib/display-icon'
 import displayNotice from './lib/display-notice'
 import setChatColor from './lib/chat-color-setter'
+import sendToFilterChatPopupIfNeeded from './lib/send-to-filter-chat-popup'
 import { MESSAGE_CHAT_ONE_LINE, MESSAGE_SET_NICKNAME_COLOR } from './lib/consts'
 import { getStorageLocalBoolean } from './lib/storage-utils'
 
@@ -40,6 +41,7 @@ const callback = function (mutationsList: MutationRecord[], observer: MutationOb
           displayIcon(node)
           isDisplayChatOneLine && displayChatOneLine(node)
           isSetNicknameColor && setChatColor(node)
+          sendToFilterChatPopupIfNeeded(node)
         }
 
         if (isDonation(node)) {

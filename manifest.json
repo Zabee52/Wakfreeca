@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Wakfreeca",
   "description": "UI utility for afreecatv",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "action": {
     "default_icon": {
       "16": "images/icon-16.png",
@@ -19,11 +19,7 @@
   },
   "content_scripts": [
     {
-      "js": ["dist/element-filter.bundle.js"],
-      "matches": ["https://play.afreecatv.com/*"]
-    },
-    {
-      "js": ["dist/settings.bundle.js"],
+      "js": ["dist/element-filter.bundle.js", "dist/settings.bundle.js", "dist/move-layer.bundle.js"],
       "matches": ["https://play.afreecatv.com/*"]
     }
   ],
