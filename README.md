@@ -36,7 +36,6 @@
 ![image](https://github.com/Zabee52/Twiraforming/assets/93498724/7a4ecb4b-d34c-4257-917e-a1e20a308433)
 ![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/4db2accf-5713-41e0-88c6-4700def8f181)
 
-
 ## 기술의 범위
 - Javascript만으로 작성된 내용으로, 모든 설정은 사용자의 브라우저 로컬에 저장되며, __외부 저장 공간에 대한 어떠한 액세스도 수행하지 않습니다.__
 - 레이아웃의 변경과 관련한 작업만 수행하는 크롬 익스텐션으로, __어떠한 정보도 외부에 수집되지 않습니다.__
