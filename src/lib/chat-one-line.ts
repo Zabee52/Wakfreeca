@@ -1,4 +1,5 @@
-import { elementToSpan } from './dom-utils'
+import { isBj } from './afreeca-utils'
+import { cloneElementColorStyle, elementToSpan } from './dom-utils'
 
 export default (node: HTMLElement) => {
   node.style.paddingTop = '2px'
@@ -27,16 +28,24 @@ export default (node: HTMLElement) => {
   if (!chatSection) {
     return
   }
-  const chatSectionSpan = elementToSpan(chatSection)
+  const chatSectionSpan = chatToSpanIfFanChat(chatSection)
   chatSectionSpan.style.fontFamily = '"NG", "돋움", "dotum", "AppleGothic"'
   chatSectionSpan.style.fontSize = 'calc( var(--text-default) + var(--text-size) * 2 )'
   chatSectionSpan.style.marginLeft = '2px'
-  for (const className of node.classList ?? []) {
-    if (className !== 'bj') {
-      continue
-    }
+
+  if (isBj(node)) {
     chatSectionSpan.style.fontWeight = 'bold'
-    break
   }
+
   chatSection.replaceWith(chatSectionSpan)
+}
+
+function chatToSpanIfFanChat(element: HTMLElement) {
+  const fanChatColorElement = element.querySelector('#fan_chatcolor') as HTMLElement | null
+  if (!fanChatColorElement) {
+    return elementToSpan(element)
+  }
+  const chatSpan = elementToSpan(fanChatColorElement)
+  cloneElementColorStyle(fanChatColorElement, chatSpan)
+  return chatSpan
 }

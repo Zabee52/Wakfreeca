@@ -3,8 +3,21 @@ export function elementToSpan(element: HTMLElement) {
   while (element.firstChild) {
     span.appendChild(element.firstChild)
   }
-  element.classList?.forEach((className) => {
-    span.classList.add(className)
-  })
+  cloneElementClass(element, span)
+
   return span
+}
+
+function cloneElementClass(element: HTMLElement, target: HTMLElement) {
+  element.classList?.forEach((className) => {
+    target.classList.add(className)
+  })
+}
+
+export function cloneElementColorStyle(element: HTMLElement, target: HTMLElement) {
+  const styles = window.getComputedStyle(element)
+  const colorStyle = styles.getPropertyValue('color')
+  if (colorStyle) {
+    target.style.color = colorStyle
+  }
 }
