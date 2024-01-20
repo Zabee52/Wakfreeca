@@ -107,4 +107,4 @@ function init() {
   moveLayerRoot.appendChild(userFilteredChatPopup)
 }
 
-init()
+// init()
