@@ -1,6 +1,3 @@
-import { isBj } from './afreeca-utils'
-import { cloneElementColorStyle, elementToSpan } from './dom-utils'
-
 export default (node: HTMLElement) => {
   node.style.paddingTop = '2px'
   node.style.paddingBottom = '2px'
@@ -9,43 +6,27 @@ export default (node: HTMLElement) => {
   if (!nicknameArea) {
     return
   }
-  nicknameArea.style.display = 'inline-flex'
-  nicknameArea.style.alignItems = 'center'
-  nicknameArea.style.gap = '2px'
+  nicknameArea.style.display = 'inline'
 
-  const nickname = nicknameArea?.querySelector('a')?.childNodes[0]
+  // 아이콘 마진 조정
+  const icons = Array.from(nicknameArea.querySelectorAll('img'))
+  for (const icon of icons) {
+    icon.style.margin = '0 4px 0 0'
+  }
+
+  // 닉네임 굵게
+  const nickname = nicknameArea.querySelector('a')
   if (!nickname) {
     return
   }
-  // 닉네임에 bold 적용
-  // em 태그로 생성하는 이유는 기존 afreecaTV의 스타일을 상속받기 위해
-  const wrapEm = document.createElement('em')
-  wrapEm.textContent = nickname.textContent
-  wrapEm.style.fontWeight = 'bold'
-  nickname.replaceWith(wrapEm)
+  nickname.style.fontWeight = 'bold'
 
+  // 채팅 한 줄로 표시
   const chatSection = node.querySelector('dd')
   if (!chatSection) {
     return
   }
-  const chatSectionSpan = chatToSpanIfFanChat(chatSection)
-  chatSectionSpan.style.fontFamily = '"NG", "돋움", "dotum", "AppleGothic"'
-  chatSectionSpan.style.fontSize = 'calc( var(--text-default) + var(--text-size) * 2 )'
-  chatSectionSpan.style.marginLeft = '2px'
-
-  if (isBj(node)) {
-    chatSectionSpan.style.fontWeight = 'bold'
-  }
-
-  chatSection.replaceWith(chatSectionSpan)
-}
-
-function chatToSpanIfFanChat(element: HTMLElement) {
-  const fanChatColorElement = element.querySelector('#fan_chatcolor') as HTMLElement | null
-  if (!fanChatColorElement) {
-    return elementToSpan(element)
-  }
-  const chatSpan = elementToSpan(fanChatColorElement)
-  cloneElementColorStyle(fanChatColorElement, chatSpan)
-  return chatSpan
+  chatSection.style.display = 'inline'
+  chatSection.style.marginLeft = '4px'
+  chatSection.style.lineHeight = '1.5'
 }
