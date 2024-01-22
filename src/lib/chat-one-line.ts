@@ -22,11 +22,20 @@ export default (node: HTMLElement) => {
   nickname.style.fontWeight = 'bold'
 
   // 채팅 한 줄로 표시
-  const chatSection = node.querySelector('dd')
-  if (!chatSection) {
+  const chat = node.querySelector('dd')
+  if (!chat) {
     return
   }
-  chatSection.style.display = 'inline'
-  chatSection.style.marginLeft = '4px'
-  chatSection.style.lineHeight = '1.5'
+  chat.style.display = 'inline'
+  chat.style.marginLeft = '4px'
+  chat.style.lineHeight = '1.5'
+
+  // 팬 채팅일 경우 처리
+  // 팬 채팅은 chat element 하위에 fan_chatcolor div element가 있음.
+  const fanChat = chat.querySelector('#fan_chatcolor') as HTMLElement | null
+  if (!!fanChat) {
+    chat.textContent = fanChat.textContent
+    chat.style.color = fanChat.style.color
+    fanChat.remove()
+  }
 }
