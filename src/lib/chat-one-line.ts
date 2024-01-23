@@ -29,6 +29,7 @@ export default (node: HTMLElement) => {
   chat.style.display = 'inline'
   chat.style.marginLeft = '4px'
   chat.style.lineHeight = '1.5'
+  chat.style.paddingLeft = '0' // 퍼스나콘 사용 시 적용되는 왼쪽 패딩 제거 목적
 
   // 팬 채팅일 경우 처리
   // 팬 채팅은 chat element 하위에 fan_chatcolor div element가 있음.
