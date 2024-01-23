@@ -19,7 +19,6 @@ CHAT_LAYER_SET_DISPLAY_PERSONACON_MESSAGES.forEach((message) => {
 export default (node: HTMLElement) => {
   // iconType은 dt의 classList지만, 아프리카TV에서는 이 정보를 표시할 퍼스나콘 타입을 정의하는데 사용 하고 있음
   const iconType = node.querySelector('dt')?.classList
-  const personacon = node.querySelector('em')
   const isBj = ['man', 'woman'].some((type) => iconType?.contains(type))
   const bjDisplayCond = isBj && personaconDisplayMap[ID_PERSONACON_BJ]
 
@@ -38,7 +37,7 @@ export default (node: HTMLElement) => {
   const isSubscriber = ['gudok_m', 'gudok_w'].some((type) => iconType?.contains(type))
   const subscriberDisplayCond = isSubscriber && personaconDisplayMap[ID_PERSONACON_SUBSCRIPTION]
 
-  const isRemove = [
+  const isRemoved = [
     bjDisplayCond,
     managerDisplayCond,
     fanDisplayCond,
@@ -47,11 +46,16 @@ export default (node: HTMLElement) => {
     subscriberDisplayCond,
   ].every((cond) => !cond)
 
-  if (!isRemove) {
+  if (!isRemoved) {
     return
   }
-  personacon?.remove()
-  // // 채팅 섹션은 성별 아이콘을 표시하기 위해 왼쪽 패딩을 사용하는데, 이를 제거하기 위한 코드
+  const personacon = node.querySelector('em')
+  if (!personacon) {
+    return
+  }
+  personacon.remove()
+
+  // 퍼스나콘은 성별 아이콘을 표시하기 위해, 챗 영역은 퍼스나콘 만큼 공간 확보를 위해 왼쪽 패딩을 사용하는데, 이를 제거하기 위한 코드
   node.childNodes.forEach((child) => {
     if (!(child instanceof HTMLElement)) {
       return
