@@ -37,7 +37,7 @@ export default (node: HTMLElement) => {
   const isSubscriber = ['gudok_m', 'gudok_w'].some((type) => iconType?.contains(type))
   const subscriberDisplayCond = isSubscriber && personaconDisplayMap[ID_PERSONACON_SUBSCRIPTION]
 
-  const isNeedRemoved = [
+  const isNeedRemove = [
     bjDisplayCond,
     managerDisplayCond,
     fanDisplayCond,
@@ -46,9 +46,10 @@ export default (node: HTMLElement) => {
     subscriberDisplayCond,
   ].every((cond) => !cond)
 
-  if (!isNeedRemoved) {
+  if (!isNeedRemove) {
     return
   }
+  
   const personacon = node.querySelector('em')
   if (!personacon) {
     return
