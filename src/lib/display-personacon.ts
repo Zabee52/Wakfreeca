@@ -16,25 +16,74 @@ CHAT_LAYER_SET_DISPLAY_PERSONACON_MESSAGES.forEach((message) => {
   })
 })
 
+interface RoleGenderType {
+  male: string
+  female: string
+  genderHidden: string
+}
+
+const roleGenderConsts: Record<string, RoleGenderType> = {
+  bj: {
+    male: 'man',
+    female: 'woman',
+    genderHidden: 'bj',
+  },
+  manager: {
+    male: 'manager_m',
+    female: 'manager_w',
+    genderHidden: 'manager',
+  },
+  hotFan: {
+    male: 'hot_m',
+    female: 'hot_w',
+    genderHidden: 'hot',
+  },
+  fan: {
+    male: 'fan_m',
+    female: 'fan_w',
+    genderHidden: 'fan',
+  },
+  normal: {
+    male: 'user_m',
+    female: 'user_w',
+    genderHidden: 'user',
+  },
+  subscriber: {
+    male: 'gudok_m',
+    female: 'gudok_w',
+    genderHidden: 'gudok',
+  },
+}
+
+const isRoleMatched = (iconType: DOMTokenList | undefined, role: RoleGenderType) => {
+  const { male, female, genderHidden } = role
+  const commonCond = [male, female].some((type) => iconType?.contains(type))
+  const genderHiddenCond = [genderHidden, 'gender'].every((type) => iconType?.contains(type))
+  return commonCond || genderHiddenCond
+}
+
 export default (node: HTMLElement) => {
   // iconType은 dt의 classList지만, 아프리카TV에서는 이 정보를 표시할 퍼스나콘 타입을 정의하는데 사용 하고 있음
   const iconType = node.querySelector('dt')?.classList
-  const isBj = ['man', 'woman'].some((type) => iconType?.contains(type))
+
+  const { bj, manager, hotFan, fan, normal, subscriber } = roleGenderConsts
+  // bj면서 gender 여야 함, man 또는 woman 이어야 함
+  const isBj = isRoleMatched(iconType, bj)
   const bjDisplayCond = isBj && personaconDisplayMap[ID_PERSONACON_BJ]
 
-  const isManager = ['manager_m', 'manager_w'].some((type) => iconType?.contains(type))
+  const isManager = isRoleMatched(iconType, manager)
   const managerDisplayCond = isManager && personaconDisplayMap[ID_PERSONACON_MANAGER]
 
-  const isFeverFan = ['hot_m', 'hot_w'].some((type) => iconType?.contains(type))
-  const feverFanDisplayCond = isFeverFan && personaconDisplayMap[ID_PERSONACON_FEVER_FAN]
+  const isHotFan = isRoleMatched(iconType, hotFan)
+  const hotFanDisplayCond = isHotFan && personaconDisplayMap[ID_PERSONACON_FEVER_FAN]
 
-  const isFan = ['fan_m', 'fan_w'].some((type) => iconType?.contains(type))
+  const isFan = isRoleMatched(iconType, fan)
   const fanDisplayCond = isFan && personaconDisplayMap[ID_PERSONACON_FAN]
 
-  const isNormal = ['user_m', 'user_w', 'gender'].some((type) => iconType?.contains(type))
+  const isNormal = isRoleMatched(iconType, normal)
   const normalDisplayCond = isNormal && personaconDisplayMap[ID_PERSONACON_NORMAL]
 
-  const isSubscriber = ['gudok_m', 'gudok_w'].some((type) => iconType?.contains(type))
+  const isSubscriber = isRoleMatched(iconType, subscriber)
   const subscriberDisplayCond = isSubscriber && personaconDisplayMap[ID_PERSONACON_SUBSCRIPTION]
 
   const isNeedRemove = [
@@ -42,14 +91,14 @@ export default (node: HTMLElement) => {
     managerDisplayCond,
     fanDisplayCond,
     normalDisplayCond,
-    feverFanDisplayCond,
+    hotFanDisplayCond,
     subscriberDisplayCond,
   ].every((cond) => !cond)
 
   if (!isNeedRemove) {
     return
   }
-  
+
   const personacon = node.querySelector('em')
   if (!personacon) {
     return
