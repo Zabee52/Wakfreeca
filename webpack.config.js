@@ -1,4 +1,5 @@
 const path = require('path')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -25,4 +26,7 @@ module.exports = {
     filename: '[name].bundle.js',
   },
   devtool: 'cheap-module-source-map', // 디버깅용 소스맵
+  plugins: [
+    new CleanWebpackPlugin(),
+  ],
 }
