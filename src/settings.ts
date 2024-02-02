@@ -372,8 +372,13 @@ function init() {
     })
 }
 
-const now = new Date()
-const dDay = new Date('2024-02-05 00:00:00')
-if (now.getTime() < dDay.getTime()) {
+function initByCondition() {
+  const now = new Date()
+  const dDay = new Date('2024-02-05')
+  if (now.getTime() >= dDay.getTime()) {
+    return
+  }
   init()
 }
+
+initByCondition()
