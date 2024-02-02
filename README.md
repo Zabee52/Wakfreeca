@@ -1,19 +1,17 @@
 <p align="center">
-  <img src="https://github.com/Zabee52/Twiraforming/assets/93498724/97d139c0-aeaa-43c3-96ca-6b43925ba9da" height="96">
+  <img src="https://github.com/Zabee52/Wakfreeca/assets/93498724/38c65612-d864-461e-8d9b-6890f72928ab" height="96">
   <h3 align="center">Wakfreeca</h3>
 </p>
 
 <p align="center">
-  아프리카TV에 조금 더 일찍 적응하기 위한 작은 도구
+  아프리카TV를 조금 더 멋지게 사용하기 위한 작은 도구
 </p>
 
 <br/>
 
 ## Wakfreeca
 
-![image](https://github.com/Zabee52/Twiraforming/assets/93498724/17520c05-643b-4408-bb04-eefef74844e5)
-
-아프리카TV의 채팅창 레이아웃을 트위치처럼 변경해주는 chrome extension입니다.
+아프리카TV의 기능을 보조하는 chrome extension입니다.
 
 ## 사용 방법
 
@@ -31,16 +29,17 @@
       ![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/33041871-902c-4ee3-9508-67466792ac6c)
 -->
 
-#### 2. 채팅 레이아웃 설정
-![image](https://github.com/Zabee52/Twiraforming/assets/93498724/e59f6831-04ac-4c1a-b610-8bb185fd4e1c)
-![image](https://github.com/Zabee52/Twiraforming/assets/93498724/7a4ecb4b-d34c-4257-917e-a1e20a308433)
-![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/4db2accf-5713-41e0-88c6-4700def8f181)
+#### 2. 기능 임시 비활성화에 따라 추후 수정 후 기입 예정입니다. ^-^
 
 ## 기술의 범위
 - Javascript만으로 작성된 내용으로, 모든 설정은 사용자의 브라우저 로컬에 저장되며, __외부 저장 공간에 대한 어떠한 액세스도 수행하지 않습니다.__
 - 레이아웃의 변경과 관련한 작업만 수행하는 크롬 익스텐션으로, __어떠한 정보도 외부에 수집되지 않습니다.__
 
 ## 업데이트 기록
+### v1.9.9
+- AfreecaTV 채팅창 UI 개선에 따라 기능이 일시적으로 비활성화 될 예정입니다.
+- 다른 기능들과 함께 돌아오겠습니다! 😊
+
 ### v1.1.1
 다음 기능이 추가되었습니다.
 - 알림 표시 설정 기능: 열혈팬 입장, 탄생, 팬클럽 가입, 서포터 가입 표시 설정
