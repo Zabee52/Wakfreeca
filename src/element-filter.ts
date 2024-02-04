@@ -95,7 +95,7 @@ function init() {
 
 function initByCondition() {
   const now = new Date()
-  const dDay = new Date('2024-02-05T00:00:00+09:00')
+  const dDay = new Date('2024-02-05T03:00:00+09:00')
   if (now.getTime() >= dDay.getTime()) {
     clearStorage()
     return
