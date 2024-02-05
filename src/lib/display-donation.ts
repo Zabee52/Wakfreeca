@@ -14,25 +14,25 @@ CHAT_LAYER_SET_DISPLAY_DONATION_MESSAGES.forEach((message) => {
   })
 })
 
-export default (node: HTMLElement) => {
-  const isBalloon = node.classList.length === 1 // 별풍선은 별도의 클래스를 가지지 않음
+export default (observeTarget: HTMLElement, removeTarget: HTMLElement) => {
+  const isBalloon = observeTarget.classList.length === 1 // 별풍선은 별도의 클래스를 가지지 않음
   if (isBalloon && !donationDisplayMap[ID_DONATION_BALLOON]) {
-    node.remove()
+    removeTarget.remove()
     return
   }
-  const isSubscription = node.classList.contains('subscribe')
+  const isSubscription = observeTarget.classList.contains('subscribe')
   if (isSubscription && !donationDisplayMap[ID_DONATION_SUBSCRIPTION]) {
-    node.remove()
+    removeTarget.remove()
     return
   }
-  const isAdballon = node.classList.contains('adballoon')
+  const isAdballon = observeTarget.classList.contains('adballoon')
   if (isAdballon && !donationDisplayMap[ID_DONATION_AD_BALLOON]) {
-    node.remove()
+    removeTarget.remove()
     return
   }
-  const isSticker = node.classList.contains('sticker')
+  const isSticker = observeTarget.classList.contains('sticker')
   if (isSticker && !donationDisplayMap[ID_DONATION_STICKER]) {
-    node.remove()
+    removeTarget.remove()
     return
   }
 }

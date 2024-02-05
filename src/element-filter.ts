@@ -5,12 +5,12 @@ import displayNotice from './lib/display-notice'
 
 function init() {
   // TODO: 필터링 목록 선택할 수 있도록 조정
-  const targetNode = document.getElementById('chat_area')
+  let targetNode = document.getElementById('chat_area')
   if (!targetNode) {
     throw new Error('chat_area element not found')
   }
 
-  const observerConfig = { attributes: false, childList: true, subtree: false }
+  const observerConfig = { attributes: false, childList: true, subtree: true }
 
   const callback = function (mutationsList: MutationRecord[], observer: MutationObserver) {
     for (const mutation of mutationsList) {
@@ -34,12 +34,12 @@ function init() {
         }
 
         if (isDonation(mutateTargetNode)) {
-          displayDonation(mutateTargetNode)
+          displayDonation(mutateTargetNode, node)
           return
         }
 
         if (isNotice(mutateTargetNode)) {
-          displayNotice(mutateTargetNode)
+          displayNotice(mutateTargetNode, node)
           return
         }
       })
