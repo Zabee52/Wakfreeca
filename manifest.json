@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Wakfreeca",
   "description": "AfreecaTV utility for woowakgood",
-  "version": "1.9.91",
+  "version": "2.0.0",
   "action": {
     "default_icon": {
       "16": "images/icon-16.png",

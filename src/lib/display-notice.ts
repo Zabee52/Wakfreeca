@@ -1,9 +1,9 @@
 import {
   CHAT_LAYER_SET_DISPLAY_NOTICE_MESSAGES,
-  ID_NOTICE_HOTFAN_IN,
-  ID_NOTICE_HOTFAN,
   ID_NOTICE_FAN,
   ID_NOTICE_SUPPORTER,
+  ID_NOTICE_VIP,
+  ID_NOTICE_VIP_ENTER,
 } from './consts'
 import { getStorageLocalBoolean } from './storage-utils'
 
@@ -15,23 +15,28 @@ CHAT_LAYER_SET_DISPLAY_NOTICE_MESSAGES.forEach((message) => {
 })
 
 export default (node: HTMLElement) => {
-  const isHotFanIn = ['hotfan', 'in'].every((className) => node.classList.contains(className))
-  if (isHotFanIn && !noticeDisplayMap[ID_NOTICE_HOTFAN_IN]) {
+  if (!node.classList.contains('donation-state')) {
+    return
+  }
+
+  const message = node.querySelector('p')
+  const isEnterVip = message?.textContent?.includes('대화방에 참여했습니다.')
+  if (isEnterVip && !noticeDisplayMap[ID_NOTICE_VIP_ENTER]) {
     node.remove()
     return
   }
-  const isHotFan = !isHotFanIn && ['hotfan'].some((className) => node.classList.contains(className))
-  if (isHotFan && !noticeDisplayMap[ID_NOTICE_HOTFAN]) {
+  const isJoinVip = message?.textContent?.includes('열혈팬이 되셨습니다.')
+  if (isJoinVip && !noticeDisplayMap[ID_NOTICE_VIP]) {
     node.remove()
     return
   }
-  const isFan = node.classList.contains('fanclub')
-  if (isFan && !noticeDisplayMap[ID_NOTICE_FAN]) {
+  const isJoinFan = message?.textContent?.includes('팬클럽이')
+  if (isJoinFan && !noticeDisplayMap[ID_NOTICE_FAN]) {
     node.remove()
     return
   }
-  const isSupporter = node.classList.contains('support')
-  if (isSupporter && !noticeDisplayMap[ID_NOTICE_SUPPORTER]) {
+  const isJoinSupporter = message?.textContent?.includes('서포터가')
+  if (isJoinSupporter && !noticeDisplayMap[ID_NOTICE_SUPPORTER]) {
     node.remove()
     return
   }
