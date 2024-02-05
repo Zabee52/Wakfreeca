@@ -1,12 +1,7 @@
+import { isChat, isDonation, isNotice } from './lib/afreeca-utils'
 import displayDonation from './lib/display-donation'
-import displayChatOneLine from './lib/chat-one-line'
-import displayPersonacon from './lib/display-personacon'
 import displayIcon from './lib/display-icon'
 import displayNotice from './lib/display-notice'
-import setChatColor from './lib/chat-color-setter'
-import sendToFilterChatPopupIfNeeded from './lib/send-to-filter-chat-popup'
-import { MESSAGE_CHAT_ONE_LINE, MESSAGE_SET_NICKNAME_COLOR } from './lib/consts'
-import { clearStorage, getStorageLocalBoolean } from './lib/storage-utils'
 
 function init() {
   // TODO: 필터링 목록 선택할 수 있도록 조정
@@ -15,62 +10,40 @@ function init() {
     throw new Error('chat_area element not found')
   }
 
-  const observerConfig = { attributes: false, childList: true, subtree: true }
-
-  let isDisplayChatOneLine = false
-  let isSetNicknameColor = false
-
-  Promise.all([getStorageLocalBoolean(MESSAGE_CHAT_ONE_LINE), getStorageLocalBoolean(MESSAGE_SET_NICKNAME_COLOR)])
-    .then(([chatOneLineChecked, setNicknameColorChecked]) => {
-      isDisplayChatOneLine = chatOneLineChecked
-      isSetNicknameColor = setNicknameColorChecked
-    })
-    .catch((error) => {
-      console.error('😞 스토리지에서 설정을 불러오는 데 실패했습니다:', error)
-    })
+  const observerConfig = { attributes: false, childList: true, subtree: false }
 
   const callback = function (mutationsList: MutationRecord[], observer: MutationObserver) {
     for (const mutation of mutationsList) {
-      if (mutation.type === 'childList') {
-        mutation.addedNodes.forEach((node: Node) => {
-          if (!(node instanceof HTMLElement)) {
-            return
-          }
-
-          if (isChat(node)) {
-            displayPersonacon(node)
-            displayIcon(node)
-            isDisplayChatOneLine && displayChatOneLine(node)
-            isSetNicknameColor && setChatColor(node)
-            sendToFilterChatPopupIfNeeded(node)
-          }
-
-          if (isDonation(node)) {
-            displayDonation(node)
-          }
-
-          if (isNotice(node)) {
-            displayNotice(node)
-          }
-        })
+      if (mutation.type !== 'childList') {
+        continue
       }
+
+      mutation.addedNodes.forEach((node: Node) => {
+        if (!(node instanceof HTMLElement)) {
+          return
+        }
+
+        const mutateTargetNode = node.querySelector('div')
+        if (!mutateTargetNode) {
+          return
+        }
+
+        if (isChat(mutateTargetNode)) {
+          displayIcon(mutateTargetNode)
+          return
+        }
+
+        if (isDonation(mutateTargetNode)) {
+          displayDonation(mutateTargetNode)
+          return
+        }
+
+        if (isNotice(mutateTargetNode)) {
+          displayNotice(mutateTargetNode)
+          return
+        }
+      })
     }
-  }
-
-  function isChat(node: HTMLElement) {
-    return node.hasAttribute?.('user_id') && !isDonation(node) && !isNotice(node)
-  }
-
-  function isDonation(node: HTMLElement) {
-    return (
-      node.classList?.contains('balloon_area') ||
-      node.classList?.contains('adballoon_area') ||
-      node.classList?.contains('sticker_area')
-    )
-  }
-
-  function isNotice(node: HTMLElement) {
-    return node.classList?.contains('notice')
   }
 
   // 옵저버 인스턴스 생성
@@ -78,30 +51,6 @@ function init() {
 
   // 옵저버 시작
   observer.observe(targetNode, observerConfig)
-
-  // Storage Change Listener
-  chrome.storage.onChanged.addListener(function (changes, areaName) {
-    if (areaName !== 'local') {
-      return
-    }
-    if (changes[MESSAGE_CHAT_ONE_LINE]) {
-      isDisplayChatOneLine = changes[MESSAGE_CHAT_ONE_LINE].newValue
-    }
-    if (changes[MESSAGE_SET_NICKNAME_COLOR]) {
-      isSetNicknameColor = changes[MESSAGE_SET_NICKNAME_COLOR].newValue
-    }
-  })
 }
 
-function initByCondition() {
-  const now = new Date()
-  const dDay = new Date('2024-02-05T03:00:00+09:00')
-  if (now.getTime() >= dDay.getTime()) {
-    clearStorage()
-    return
-  }
-
-  init()
-}
-
-initByCondition()
+init()

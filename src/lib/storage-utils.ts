@@ -14,6 +14,3 @@ export function storageLocalBoolean({ key, value }: { key: string; value: boolea
   return chrome.storage.local.set({ [key]: value })
 }
 
-export function clearStorage() {
-  return chrome.storage.local.clear()
-}

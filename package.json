@@ -1,6 +1,6 @@
 {
   "name": "wakfreeca",
-  "version": "1.9.9",
+  "version": "2.0.0",
   "description": "AfreecaTV에서 사용할 유틸리티",
   "main": "index.js",
   "scripts": {

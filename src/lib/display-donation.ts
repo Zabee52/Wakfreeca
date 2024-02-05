@@ -3,6 +3,7 @@ import {
   ID_DONATION_BALLOON,
   ID_DONATION_AD_BALLOON,
   ID_DONATION_STICKER,
+  ID_DONATION_SUBSCRIPTION,
 } from './consts'
 import { getStorageLocalBoolean } from './storage-utils'
 
@@ -14,17 +15,22 @@ CHAT_LAYER_SET_DISPLAY_DONATION_MESSAGES.forEach((message) => {
 })
 
 export default (node: HTMLElement) => {
-  const isBalloon = node.classList.contains('balloon_area')
+  const isBalloon = node.classList.length === 1 // 별풍선은 별도의 클래스를 가지지 않음
   if (isBalloon && !donationDisplayMap[ID_DONATION_BALLOON]) {
     node.remove()
     return
   }
-  const isAdballon = node.classList.contains('adballoon_area')
+  const isSubscription = node.classList.contains('subscribe')
+  if (isSubscription && !donationDisplayMap[ID_DONATION_SUBSCRIPTION]) {
+    node.remove()
+    return
+  }
+  const isAdballon = node.classList.contains('adballoon')
   if (isAdballon && !donationDisplayMap[ID_DONATION_AD_BALLOON]) {
     node.remove()
     return
   }
-  const isSticker = node.classList.contains('sticker_area')
+  const isSticker = node.classList.contains('sticker')
   if (isSticker && !donationDisplayMap[ID_DONATION_STICKER]) {
     node.remove()
     return

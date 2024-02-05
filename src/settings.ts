@@ -1,30 +1,21 @@
 import {
   ID_CHAT_LAYER_SET_DISPLAY_DONATION,
   ID_CHAT_LAYER_SET_DISPLAY_ICON,
-  ID_CHAT_ONE_LINE,
-  ID_ICON_BJ,
-  ID_ICON_FAN,
-  ID_ICON_FEVER_FAN,
-  ID_ICON_MANAGER,
-  ID_ICON_QUICK_VIEW,
-  ID_ICON_SUBSCRIPTION,
-  ID_PERSONACON_BJ,
-  ID_PERSONACON_NORMAL,
-  ID_PERSONACON_MANAGER,
-  ID_PERSONACON_SUBSCRIPTION,
-  ID_SET_NICKNAME_COLOR,
-  ID_CHAT_LAYER_SET_DISPLAY_PERSONACON,
-  ID_PERSONACON_FAN,
-  ID_PERSONACON_FEVER_FAN,
   ID_DONATION_AD_BALLOON,
   ID_DONATION_BALLOON,
   ID_DONATION_STICKER,
-  ID_ICON_SUPPORTER,
   ID_CHAT_LAYER_SET_DISPLAY_NOTICE,
-  ID_NOTICE_HOTFAN_IN,
-  ID_NOTICE_HOTFAN,
   ID_NOTICE_FAN,
   ID_NOTICE_SUPPORTER,
+  ID_DISPLAY_ICON_FAN,
+  ID_DISPLAY_ICON_MANAGER,
+  ID_DISPLAY_ICON_STREAMER,
+  ID_DISPLAY_ICON_SUPPORTER,
+  ID_DISPLAY_ICON_VIP,
+  ID_DONATION_SUBSCRIPTION,
+  ID_NOTICE_VIP,
+  ID_NOTICE_VIP_ENTER,
+  ID_DISPLAY_ICON_SUBSCRIPTION,
 } from './lib/consts'
 import { SettingItem } from './lib/interfaces'
 import { getStorageLocalBoolean, storageLocalBoolean } from './lib/storage-utils'
@@ -180,68 +171,41 @@ function init() {
     throw new Error('chat_layer_setting element not found')
   }
 
-  const chatLayerSetPersonaconItems: Record<string, SettingItem> = {
-    [ID_PERSONACON_BJ]: {
-      type: 'checkbox',
-      text: 'BJ 퍼스나콘',
-    },
-    [ID_PERSONACON_MANAGER]: {
-      type: 'checkbox',
-      text: '매니저 퍼스나콘',
-    },
-    [ID_PERSONACON_SUBSCRIPTION]: {
-      type: 'checkbox',
-      text: '구독자 퍼스나콘',
-    },
-    [ID_PERSONACON_FEVER_FAN]: {
-      type: 'checkbox',
-      text: '열혈팬 퍼스나콘',
-    },
-    [ID_PERSONACON_FAN]: {
-      type: 'checkbox',
-      text: '팬클럽 퍼스나콘',
-    },
-    [ID_PERSONACON_NORMAL]: {
-      type: 'checkbox',
-      text: '일반 사용자 퍼스나콘',
-    },
-  }
-
   const chatLayerSetIconItems: Record<string, SettingItem> = {
-    [ID_ICON_BJ]: {
+    [ID_DISPLAY_ICON_STREAMER]: {
       type: 'checkbox',
       text: 'BJ 아이콘',
     },
-    [ID_ICON_MANAGER]: {
+    [ID_DISPLAY_ICON_MANAGER]: {
       type: 'checkbox',
       text: '매니저 아이콘',
     },
-    [ID_ICON_SUBSCRIPTION]: {
-      type: 'checkbox',
-      text: '구독자 아이콘',
-    },
-    [ID_ICON_FEVER_FAN]: {
+    [ID_DISPLAY_ICON_VIP]: {
       type: 'checkbox',
       text: '열혈팬 아이콘',
     },
-    [ID_ICON_FAN]: {
+    [ID_DISPLAY_ICON_SUBSCRIPTION]: {
+      type: 'checkbox',
+      text: '구독 아이콘',
+    },
+    [ID_DISPLAY_ICON_FAN]: {
       type: 'checkbox',
       text: '팬클럽 아이콘',
     },
-    [ID_ICON_SUPPORTER]: {
+    [ID_DISPLAY_ICON_SUPPORTER]: {
       type: 'checkbox',
       text: '서포터 아이콘',
-    },
-    [ID_ICON_QUICK_VIEW]: {
-      type: 'checkbox',
-      text: '퀵뷰 아이콘',
     },
   }
 
   const chatLayerSetDisplayDonationItems: Record<string, SettingItem> = {
+    [ID_DONATION_SUBSCRIPTION]: {
+      type: 'checkbox',
+      text: '구독',
+    },
     [ID_DONATION_BALLOON]: {
       type: 'checkbox',
-      text: '별풍선 / 구독',
+      text: '별풍선',
     },
     [ID_DONATION_AD_BALLOON]: {
       type: 'checkbox',
@@ -254,11 +218,11 @@ function init() {
   }
 
   const chatLayerSetNoticeItems: Record<string, SettingItem> = {
-    [ID_NOTICE_HOTFAN_IN]: {
+    [ID_NOTICE_VIP_ENTER]: {
       type: 'checkbox',
       text: '열혈팬 입장 알림',
     },
-    [ID_NOTICE_HOTFAN]: {
+    [ID_NOTICE_VIP]: {
       type: 'checkbox',
       text: '열혈팬 탄생 알림',
     },
@@ -284,22 +248,6 @@ function init() {
   }
 
   const chatLayerSubMarkItems: Record<string, SettingItem> = {
-    [ID_CHAT_ONE_LINE]: {
-      type: 'checkbox',
-      text: '채팅 한 줄로 보기',
-      noticeOn: '지금부터 채팅이 한 줄로 표시됩니다.',
-      noticeOff: '지금부터 채팅이 여러 줄로 표시됩니다.',
-    },
-    [ID_SET_NICKNAME_COLOR]: {
-      type: 'checkbox',
-      text: '닉네임에 랜덤 색상 적용',
-      noticeOn: '지금부터 닉네임에 색상이 적용됩니다.',
-      noticeOff: '지금부터 닉네임에 색상이 적용되지 않습니다.',
-    },
-    [ID_CHAT_LAYER_SET_DISPLAY_PERSONACON]: {
-      type: 'chat_layer',
-      text: '퍼스나콘 표시 설정',
-    },
     [ID_CHAT_LAYER_SET_DISPLAY_ICON]: {
       type: 'chat_layer',
       text: '아이콘 표시 설정',
@@ -341,9 +289,6 @@ function init() {
 
       let items: Record<string, SettingItem> | null = null
       switch (id) {
-        case ID_CHAT_LAYER_SET_DISPLAY_PERSONACON:
-          items = chatLayerSetPersonaconItems
-          break
         case ID_CHAT_LAYER_SET_DISPLAY_ICON:
           items = chatLayerSetIconItems
           break
@@ -372,13 +317,4 @@ function init() {
     })
 }
 
-function initByCondition() {
-  const now = new Date()
-  const dDay = new Date('2024-02-05T03:00:00+09:00')
-  if (now.getTime() >= dDay.getTime()) {
-    return
-  }
-  init()
-}
-
-initByCondition()
+init()
