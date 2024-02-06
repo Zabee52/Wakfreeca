@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Zabee52/Wakfreeca/assets/93498724/e3c181b5-3ac6-4c02-bfed-3b7e57b628ca" height="96">
+  <img src="https://github.com/Zabee52/Wakfreeca/assets/93498724/a662f369-335a-4c77-99fc-ab3e3467744f" height="96">
   <h3 align="center">Wakfreeca</h3>
 </p>
 
@@ -17,49 +17,19 @@
 
 #### 1. 크롬 익스텐션 다운로드
 - [크롬 웹 스토어에서 추가하기](https://chromewebstore.google.com/u/2/detail/wakfreeca/ppiicfcfonlkjdenhjblpdlniehkpalf?hl=ko)
-<!--
-- 미리 사용해보는 방법
-  - Wakfreeca.zip 다운로드 : [링크](https://github.com/Zabee52/Wakfreeca/raw/main/Wakfreeca.zip)
-  - 내려받은 파일의 압축을 해제
-  - Google chrome
-    1. 주소창에 `chrome://extensions/` 를 입력하여 확장 프로그램 관리 탭에 접속
-    2. `개발자 모드`를 활성화한 후, `압축 해제된 확장 프로그램을 로드합니다.`를 클릭하여 압축 해제된 Wakfreeca 폴더를 선택
-      ![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/e75ba036-ecda-4293-b851-264e66e77a28)
-    3. 활성화 완료! 🥳
-      ![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/33041871-902c-4ee3-9508-67466792ac6c)
--->
 
-#### 2. 기능 임시 비활성화에 따라 추후 수정 후 기입 예정입니다. ^-^
+#### 2. 아프리카TV 채팅창의 설정 -> 
+![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/d17cec4f-3234-4667-aaa7-16419b8d55f6)
+![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/75a11f8c-56a1-400a-ba24-781ff5f8f077)
+![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/a317c3e4-7166-4e15-a327-25c09e03116c)
 
 ## 기술의 범위
 - Javascript만으로 작성된 내용으로, 모든 설정은 사용자의 브라우저 로컬에 저장되며, __외부 저장 공간에 대한 어떠한 액세스도 수행하지 않습니다.__
 - 레이아웃의 변경과 관련한 작업만 수행하는 크롬 익스텐션으로, __어떠한 정보도 외부에 수집되지 않습니다.__
 
 ## 업데이트 기록
-### v1.9.9
-- AfreecaTV 채팅창 UI 개선에 따라 기능이 일시적으로 비활성화 될 예정입니다.
-- 다른 기능들과 함께 돌아오겠습니다! 😊
-
-### v1.1.1
-다음 기능이 추가되었습니다.
-- 알림 표시 설정 기능: 열혈팬 입장, 탄생, 팬클럽 가입, 서포터 가입 표시 설정
-  - 아프리카TV의 알림 종류를 제가 잘 몰라서 일단 확인되는 대로 추가했는데, 더 있다면 제보해주시면 처리하겠습니다 (__)
-
-### v1.1.0
-다음 기능이 추가되었습니다.
-- 닉네임 색상 변경 활성화 기능
-- 별풍선/구독, 애드벌룬, 스티커 별 감추기 기능
-- BJ, 매니저, 열혈팬, 팬클럽, 구독자, 일반 사용자 별 퍼스나콘 감추기 기능
-- BJ, 매니저, 열혈팬, 팬클럽, 구독자, 퀵뷰 사용자, 서포터 별 아이콘 감추기 기능
-
-아래 기능을 적용하기 위하여 UI가 소폭 수정되었습니다.
-- BJ, 매니저, 열혈팬, 팬클럽, 구독자, 일반 사용자 별 퍼스나콘 감추기 기능
-- BJ, 매니저, 열혈팬, 팬클럽, 구독자, 퀵뷰 사용자, 서포터 별 아이콘 감추기 기능
-
-다음 문제가 수정되었습니다.
-- 얼리기 상태인 채팅창에서 한 줄로 보기 설정 시 설정 기록이 최하단에 고정되는 문제
-- 글꼴 크기를 변경해도 닉네임 및 채팅에 반영되지 않는 문제
-- 글꼴 색상이 너무 어둡거나 너무 밝아서 잘 보이지 않는 문제
+### v2.0.0
+- 기존 기능들이 새로운 UI에 맞춰 재활성화 되었습니다.
 
 ### v1.0.0
 AfreecaTV의 채팅창 레이아웃 개선을 돕는 무료 유틸리티 플러그인입니다.
