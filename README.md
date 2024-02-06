@@ -18,8 +18,7 @@
 #### 1. 크롬 익스텐션 다운로드
 - [크롬 웹 스토어에서 추가하기](https://chromewebstore.google.com/u/2/detail/wakfreeca/ppiicfcfonlkjdenhjblpdlniehkpalf?hl=ko)
 
-#### 2. 아프리카TV 채팅창의 설정 -> 
-![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/d17cec4f-3234-4667-aaa7-16419b8d55f6)
+#### 2. 아프리카TV 채팅창에서 기능을 설정
 ![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/75a11f8c-56a1-400a-ba24-781ff5f8f077)
 ![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/a317c3e4-7166-4e15-a327-25c09e03116c)
 
