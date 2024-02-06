@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Zabee52/Wakfreeca/assets/93498724/38c65612-d864-461e-8d9b-6890f72928ab" height="96">
+  <img src="https://github.com/Zabee52/Wakfreeca/assets/93498724/e3c181b5-3ac6-4c02-bfed-3b7e57b628ca" height="96">
   <h3 align="center">Wakfreeca</h3>
 </p>
 
