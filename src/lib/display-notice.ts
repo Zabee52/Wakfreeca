@@ -15,16 +15,20 @@ CHAT_LAYER_SET_DISPLAY_NOTICE_MESSAGES.forEach((message) => {
 })
 
 export default (observeTarget: HTMLElement, removeTarget: HTMLElement) => {
-  if (!observeTarget.classList.contains('donation-state')) {
+  const message = observeTarget.querySelector('p')
+  if (!message) {
     return
   }
-
-  const message = observeTarget.querySelector('p')
   const isEnterVip = message?.textContent?.includes('대화방에 참여했습니다.')
   if (isEnterVip && !noticeDisplayMap[ID_NOTICE_VIP_ENTER]) {
     removeTarget.remove()
     return
   }
+
+  if (!observeTarget.classList.contains('donation-state')) {
+    return
+  }
+
   const isJoinVip = message?.textContent?.includes('열혈팬이 되셨습니다.')
   if (isJoinVip && !noticeDisplayMap[ID_NOTICE_VIP]) {
     removeTarget.remove()
