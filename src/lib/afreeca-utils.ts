@@ -22,3 +22,9 @@ export function isDonation(node: HTMLElement) {
 export function isNotice(node: HTMLElement) {
   return node.classList?.contains('system-message')
 }
+
+export const getViewerCount = () => {
+  const viewerElement = document.getElementById('nAllViewer') as HTMLElement
+  const res = Number(viewerElement?.textContent?.replace(/,/g, '')) || 5
+  return res
+}
