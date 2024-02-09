@@ -19,13 +19,13 @@
   },
   "content_scripts": [
     {
-      "js": [
-        "dist/element-filter.bundle.js",
-        "dist/settings.bundle.js",
-        "dist/move-layer.bundle.js",
-        "dist/userlist-indexer.bundle.js"
-      ],
+      "js": ["dist/element-filter.bundle.js", "dist/settings.bundle.js", "dist/move-layer.bundle.js"],
       "matches": ["https://play.afreecatv.com/*"]
+    },
+    {
+      "js": ["dist/userlist-indexer.bundle.js"],
+      "matches": ["https://play.afreecatv.com/*"],
+      "world": "MAIN"
     }
   ],
   "permissions": ["storage"],

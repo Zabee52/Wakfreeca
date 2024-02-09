@@ -57,3 +57,5 @@ export const CHAT_LAYER_SET_DISPLAY_NOTICE_MESSAGES = [
 function withPrefix(prefix: string, str: string) {
   return `${prefix}_${str}`
 }
+
+export const DEFAULT_RETRY_LIMIT = 60
