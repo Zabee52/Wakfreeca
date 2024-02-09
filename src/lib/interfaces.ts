@@ -20,3 +20,16 @@ export interface UserInformation {
   nickname: string
   userId: string
 }
+
+export interface AfreecaTvUserListItem {
+  type: string
+  female: boolean
+  liStyle: string
+  id: string
+  grade: string
+  nickname: string
+  familyNickname: string
+  flag1: number
+  flag2: number
+  genderForUserList: string
+}

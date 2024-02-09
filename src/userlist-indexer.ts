@@ -1,69 +1,108 @@
-import { UserInformation } from './lib/interfaces'
+import { DEFAULT_RETRY_LIMIT } from './lib/consts'
+import { AfreecaTvUserListItem, UserInformation } from './lib/interfaces'
+
+declare const window: any
 
 const userLists: Record<string, UserInformation> = {}
+let viewerListCalled = false
 
-const userListIndexCallback = function (mutationsList: MutationRecord[], observer: MutationObserver) {
-  for (const mutation of mutationsList) {
-    if (mutation.type !== 'childList') {
-      continue
-    }
+const ingest = (grade: string, nickname: string, userId: string) => {
+  const userInfo: UserInformation = {
+    grade,
+    nickname,
+    userId,
+  }
 
-    mutation.addedNodes.forEach(async (node: Node) => {
-      if (!(node instanceof HTMLElement) || node.classList[0] === 'title') {
-        return
-      }
+  if (!userLists[userInfo.nickname]) {
+    userLists[userInfo.nickname] = userInfo
+  }
 
-      const mutateTargetNode = node.querySelector('a')
-      if (!mutateTargetNode) {
-        return
-      }
+  return
+}
 
-      const nickname = mutateTargetNode.getAttribute('user_nick') || ''
+const delay = async (milliseconds: number) => {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds))
+}
 
-      if (userLists[nickname]) {
-        return
-      }
+const getConnectedLiveView = async (retry: number = DEFAULT_RETRY_LIMIT): Promise<any> => {
+  if (!window.liveView) {
+    throw new Error('liveView not found')
+  }
 
-      const userInformation: UserInformation = {
-        grade: mutateTargetNode.getAttribute('grade') || '',
-        nickname,
-        userId: mutateTargetNode.getAttribute('user_id') || '',
-      }
+  if (!retry) {
+    console.log('getConnectedLiveView(): retry limit exceeded')
+    return null
+  }
 
-      userLists[nickname] = userInformation
-    })
+  if (!window.liveView?.playerController?.getLivePlayer?.()?.chatSocket?.isConnected) {
+    console.log('chat server connected yet. retry, remaining:', --retry)
+    await delay(1000)
+    return getConnectedLiveView(retry)
+  }
+  return window.liveView
+}
+
+const getViewerCount = () => {
+  const viewerElement = document.getElementById('nAllViewer') as HTMLElement
+  const res = Number(viewerElement?.textContent?.replace(/,/g, '')) || 5
+  return res
+}
+
+/**
+ *
+ * @param liveView
+ * @param expectedCount : expectedCount should be less than the actual expected viewer count. recommended to use 0.5 of the actual count.
+ * @param retry
+ * @returns
+ */
+const getViewerList = async (
+  liveView: any,
+  expectedCount: number,
+  retry: number = DEFAULT_RETRY_LIMIT
+): Promise<AfreecaTvUserListItem[] | null> => {
+  if (!retry) {
+    console.log('getViewerList(): retry limit exceeded')
+    return null
+  }
+
+  const viewerList = liveView.Chat.chatUserListLayer.getFlattenedUserList() as AfreecaTvUserListItem[]
+
+  if (viewerList.length < expectedCount) {
+    console.log(viewerList.length, expectedCount)
+    console.log('viewerList not found. retry, remaining:', --retry)
+    await delay(1000)
+    return getViewerList(liveView, expectedCount, retry)
+  }
+
+  return viewerList
+}
+
+const sendChUser = (liveView: any) => {
+  if (!liveView.playerController.sendChUser) {
+    throw new Error('liveView not found')
+  }
+  liveView.playerController.sendChUser()
+  viewerListCalled = true
+}
+
+const getCurrentViewerList = async () => {
+  const liveView = await getConnectedLiveView()
+  if (!liveView?.playerController?.sendChUser) {
+    throw new Error('liveView not found')
+  }
+  try {
+    sendChUser(liveView)
+
+    const viewerCount = getViewerCount()
+    const viewerList = await getViewerList(liveView, viewerCount * 0.5)
+    console.log(viewerList)
+    return viewerList
+  } catch (err) {
+    console.error(err)
+    return null
   }
 }
 
-const userListIndexer = new MutationObserver(userListIndexCallback)
-
-function userListIndexerInit() {
-  const scrollTarget = document.getElementById('userList')
-  if (!scrollTarget) {
-    throw new Error('userList element not found')
-  }
-
-  const ingestTarget = document.getElementsByClassName('effective_list')?.[0]
-  if (!ingestTarget) {
-    throw new Error('effective_list element not found')
-  }
-
-  const observerConfig = { attributes: false, childList: true, subtree: false }
-  userListIndexer.observe(ingestTarget, observerConfig)
-}
-
-async function triggerUserListIndex() {
-  const userList = document.getElementById('userList')
-  if (!userList) {
-    throw new Error('userList element not found')
-  }
-
-  const elemHeight = userList.clientHeight
-  const maxHeight = userList.scrollHeight
-  
-  for (let i = elemHeight; i < maxHeight; i += elemHeight) {
-    userList.scrollTop = i
-  }
-}
-// userListIndexerInit()
-// triggerUserListIndex()
+getCurrentViewerList().then((res) => {
+  console.log(res)
+})

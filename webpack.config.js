@@ -1,5 +1,5 @@
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   mode: 'production',
@@ -20,14 +20,12 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'] // 해석할 파일 확장자
+    extensions: ['.tsx', '.ts', '.js'], // 해석할 파일 확장자
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
   },
   devtool: 'cheap-module-source-map', // 디버깅용 소스맵
-  plugins: [
-    new CleanWebpackPlugin(),
-  ],
+  plugins: [new CleanWebpackPlugin()],
 }
