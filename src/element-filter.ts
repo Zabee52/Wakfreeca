@@ -4,7 +4,6 @@ import displayIcon from './lib/display-icon'
 import displayNotice from './lib/display-notice'
 
 function init() {
-  // TODO: 필터링 목록 선택할 수 있도록 조정
   let targetNode = document.getElementById('chat_area')
   if (!targetNode) {
     throw new Error('chat_area element not found')
