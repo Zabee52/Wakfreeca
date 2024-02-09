@@ -8,6 +8,7 @@ module.exports = {
     settings: './src/settings.ts',
     background: './src/background.ts',
     'move-layer': './src/move-layer.ts',
+    'userlist-indexer': './src/userlist-indexer.ts',
   },
   module: {
     rules: [
