@@ -66,6 +66,7 @@ function createDragabbleElement(tagName: string): HTMLElement {
   new Draggable({ element })
   return element
 }
+
 function init() {
   const moveLayerRoot = document.getElementsByClassName('moveLayer')?.[0]
   if (!moveLayerRoot) {

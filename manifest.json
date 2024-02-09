@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Wakfreeca",
   "description": "AfreecaTV utility for woowakgood",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "action": {
     "default_icon": {
       "16": "images/icon-16.png",
@@ -19,7 +19,12 @@
   },
   "content_scripts": [
     {
-      "js": ["dist/element-filter.bundle.js", "dist/settings.bundle.js", "dist/move-layer.bundle.js"],
+      "js": [
+        "dist/element-filter.bundle.js",
+        "dist/settings.bundle.js",
+        "dist/move-layer.bundle.js",
+        "dist/userlist-indexer.bundle.js"
+      ],
       "matches": ["https://play.afreecatv.com/*"]
     }
   ],

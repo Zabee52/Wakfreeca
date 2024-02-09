@@ -14,3 +14,9 @@ export interface Rgb {
   g: number
   b: number
 }
+
+export interface UserInformation {
+  grade: string
+  nickname: string
+  userId: string
+}
