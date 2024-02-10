@@ -23,8 +23,9 @@
       "matches": ["https://play.afreecatv.com/*"]
     },
     {
-      "js": ["dist/userlist-indexer.bundle.js"],
+      "js": ["dist/user-list-searcher.bundle.js"],
       "matches": ["https://play.afreecatv.com/*"],
+      "css": ["css/user-list-searcher.css"],
       "world": "MAIN"
     }
   ],

@@ -1,8 +1,8 @@
-import { UserInformation } from './lib/interfaces'
-import { getConnectedLiveView, getCurrentViewerList } from './lib/live-view-utils'
-import { Trie } from './lib/trie'
+import { UserInformation } from './interfaces'
+import { getConnectedLiveView, getCurrentViewerList } from './live-view-utils'
+import { TrieFactory } from './trie-factory'
 
-const userList = new Trie<UserInformation>()
+const userList = TrieFactory.getInstance<UserInformation>()
 
 const ingest = (grade: string, nickname: string, userId: string) => {
   const userInfo: UserInformation = {
@@ -14,25 +14,21 @@ const ingest = (grade: string, nickname: string, userId: string) => {
   return userList.insert(nickname, userInfo)
 }
 
-const indexUserList = async () => {
+export const indexUserList = async () => {
   const liveView = await getConnectedLiveView()
   if (!liveView?.playerController?.sendChUser) {
     throw new Error('liveView not found')
   }
 
-  console.time('index')
   const viewerList = await getCurrentViewerList(liveView)
   if (!viewerList?.length) {
     console.log('index failed')
-    console.timeEnd('index')
-    return
+    return null
   }
 
   viewerList.forEach((viewer) => {
     ingest(viewer.grade, viewer.nickname, viewer.id)
   })
 
-  console.timeEnd('index')
+  return userList
 }
-
-indexUserList()

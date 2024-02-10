@@ -1,0 +1,19 @@
+#searchInput {
+    padding: 8px;
+    margin: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    outline: none;
+    background-color: white;
+    color: black;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    cursor: text;
+}
+
+#searchInput:focus, #searchInput:hover {
+    border: 1px solid #4279ff;
+}

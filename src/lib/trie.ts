@@ -32,13 +32,16 @@ export class Trie<T = any> {
     return node
   }
 
-  nearByItems(startNode: TrieNode<T>, maxCount: number = 10): T[] {
+  nearByItems(startNode: TrieNode<T>, maxCount: number = 20): T[] {
     return this.traverse(startNode, maxCount)
   }
 
   private traverse(node: TrieNode<T>, maxCount: number): T[] {
+    if (!node?.children) {
+      return []
+    }
     const resultSet: T[] = []
-    const queue: TrieNode<T>[] = [node]
+    const queue: TrieNode<T>[] = [...Object.values(node.children)]
     while (queue.length) {
       const current = queue.shift()!
       if (current.value) {
@@ -47,7 +50,11 @@ export class Trie<T = any> {
       if (resultSet.length >= maxCount) {
         break
       }
-      queue.push(...Object.values(current.children))
+      const childrens = Object.values(current.children)
+      if (!childrens.length) {
+        continue
+      }
+      queue.push(...Object.values(childrens))
     }
     return resultSet
   }
