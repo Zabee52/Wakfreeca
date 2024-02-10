@@ -32,7 +32,7 @@ export class Trie<T = any> {
     return node
   }
 
-  nearByItems(startNode: TrieNode<T>, maxCount: number = 10): T[] {
+  nearByItems(startNode: TrieNode<T>, maxCount: number = 20): T[] {
     return this.traverse(startNode, maxCount)
   }
 
