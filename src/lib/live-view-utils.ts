@@ -49,8 +49,7 @@ export const getViewerList = async (
   const viewerList = liveView.Chat.chatUserListLayer.getFlattenedUserList() as AfreecaTvUserListItem[]
 
   if (viewerList.length < expectedCount) {
-    console.log(viewerList.length, expectedCount)
-    console.log('viewerList not found. retry, remaining:', --retry)
+    console.log('viewerList not found or has error. retry, remaining:', --retry)
     await delay(1000)
     return getViewerList(liveView, expectedCount, retry)
   }

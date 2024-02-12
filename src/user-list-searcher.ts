@@ -1,14 +1,17 @@
 import { cleanChildNodes } from './lib/dom-utils'
 import { UserInformation } from './lib/interfaces'
+import { Trie } from './lib/trie'
 import { indexUserList } from './lib/user-list-indexer'
 
+let userList: Trie<UserInformation> | null = null
+
 const userListSearcherInit = async () => {
-  const userList = await indexUserList()
+  userList = await indexUserList()
   if (!userList) {
     return
   }
 
-  const appendTarget = document.getElementsByClassName('list_participant')?.[0]
+  const appendTarget = document.getElementById('list_viewer')
   if (!appendTarget) {
     return
   }
@@ -29,6 +32,7 @@ const userListSearcherInit = async () => {
   searchInput.setAttribute('id', 'searchInput')
   searchInput.setAttribute('type', 'text')
   searchInput.setAttribute('placeholder', '닉네임 검색')
+  searchInput.setAttribute('autocomplete', 'off')
 
   searchInput.addEventListener('input', (event) => {
     const target = event.target as HTMLInputElement
@@ -38,12 +42,12 @@ const userListSearcherInit = async () => {
     }
 
     const userInfos: UserInformation[] = []
-    const searchRes = userList.search(target.value)
+    const searchRes = userList!.search(target.value)
     if (searchRes?.value) {
       userInfos.push(searchRes.value)
     }
     if (searchRes) {
-      const nearByItems = userList.nearByItems(searchRes) ?? []
+      const nearByItems = userList!.nearByItems(searchRes) ?? []
       userInfos.push(...nearByItems)
     }
 
@@ -63,6 +67,11 @@ const userListSearcherInit = async () => {
     })
   })
   appendTarget.insertBefore(searchInput, userListNode)
+
+  const refreshButton = appendTarget.querySelector('.refresh') as HTMLElement
+  refreshButton.addEventListener('click', async () => {
+    userList = await indexUserList()
+  })
 }
 
 const createTitle = (textContent: string) => {
@@ -94,3 +103,12 @@ const createSimpleSpan = (textContent: string) => {
 }
 
 userListSearcherInit()
+
+const indexInterval = setInterval(async () => {
+  userList = await indexUserList()
+  if (!userList) {
+    console.log('cron indexint failed')
+    clearInterval(indexInterval)
+    return
+  }
+}, 1000 * 60 * 3)
