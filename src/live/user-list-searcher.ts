@@ -1,7 +1,7 @@
-import { cleanChildNodes } from './lib/dom-utils'
-import { UserInformation } from './lib/interfaces'
-import { Trie } from './lib/trie'
-import { indexUserList } from './lib/user-list-indexer'
+import { cleanChildNodes } from '../lib/dom-utils'
+import { UserInformation } from '../lib/interfaces'
+import { Trie } from '../lib/trie'
+import { indexUserList } from '../lib/user-list-indexer'
 
 let userList: Trie<UserInformation> | null = null
 
