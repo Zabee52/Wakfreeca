@@ -1,16 +1,9 @@
-import { isChat, isDonation, isNotice } from './lib/afreeca-utils'
-import displayDonation from './lib/display-donation'
-import displayIcon from './lib/display-icon'
-import displayNotice from './lib/display-notice'
+import { isChat, isDonation, isNotice } from './afreeca-utils'
+import displayDonation from './display-donation'
+import displayIcon from './display-icon'
+import displayNotice from './display-notice'
 
-function init() {
-  let targetNode = document.getElementById('chat_area')
-  if (!targetNode) {
-    throw new Error('chat_area element not found')
-  }
-
-  const observerConfig = { attributes: false, childList: true, subtree: true }
-
+export const getChatAreaObserver = () => {
   const callback = function (mutationsList: MutationRecord[], observer: MutationObserver) {
     for (const mutation of mutationsList) {
       if (mutation.type !== 'childList') {
@@ -46,10 +39,5 @@ function init() {
   }
 
   // 옵저버 인스턴스 생성
-  const observer = new MutationObserver(callback)
-
-  // 옵저버 시작
-  observer.observe(targetNode, observerConfig)
+  return new MutationObserver(callback)
 }
-
-init()
