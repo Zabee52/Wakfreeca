@@ -4,11 +4,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
   mode: 'production',
   entry: {
-    'element-filter': './src/element-filter.ts',
-    settings: './src/settings.ts',
     background: './src/background.ts',
-    'move-layer': './src/move-layer.ts',
-    'user-list-searcher': './src/user-list-searcher.ts',
+    'live/element-filter': './src/live/element-filter.ts',
+    'live/settings': './src/live/settings.ts',
+    'live/move-layer': './src/live/move-layer.ts',
+    'live/user-list-searcher': './src/live/user-list-searcher.ts',
+    'vod/element-filter': './src/vod/element-filter.ts',
+    'vod/settings': './src/vod/settings.ts',
   },
   module: {
     rules: [
