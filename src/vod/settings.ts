@@ -72,7 +72,6 @@ function vodSettingItemsInit() {
 
       chatBoxHeightNode.appendChild(chatLayer)
     })
-  console.log(chatBoxHeightNode)
 }
 
 let retry = 120
