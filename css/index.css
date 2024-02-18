@@ -1,0 +1,34 @@
+body {
+  width: 400px;
+  padding: 16px;
+  background-color: #F2EFE5;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.mt-2 {
+  margin-top: 8px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
