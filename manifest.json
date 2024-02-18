@@ -34,7 +34,7 @@
       "matches": ["https://vod.afreecatv.com/*"]
     }
   ],
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage"],
   "background": {
     "service_worker": "dist/background.bundle.js"
   }
