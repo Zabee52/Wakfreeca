@@ -11,6 +11,8 @@ module.exports = {
     'live/user-list-searcher': './src/live/user-list-searcher.ts',
     'vod/element-filter': './src/vod/element-filter.ts',
     'vod/settings': './src/vod/settings.ts',
+    'pages/index': './pages/index.ts',
+    'common/initializer': './src/common/initializer.ts',
   },
   module: {
     rules: [
