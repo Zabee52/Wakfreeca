@@ -1,27 +1,7 @@
 body {
   width: 400px;
   padding: 16px;
-  background-color: #F2EFE5;
-}
-
-.flex {
-  display: flex;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.justify-space-between {
-  justify-content: space-between;
-}
-
-.justify-end {
-  justify-content: flex-end;
-}
-
-.align-center {
-  align-items: center;
+  background-color: #f2efe5;
 }
 
 .mt-2 {
@@ -31,4 +11,14 @@ body {
 .title {
   font-size: 18px;
   font-weight: bold;
+}
+
+#copyEmail {
+  transition: background-color 0.3s ease;
+}
+
+.custom-switch .form-check-input {
+  cursor: pointer;
+  /* 스위치 크기 조정 */
+  transform: scale(1.5);
 }
