@@ -1,6 +1,6 @@
 <script
   type="module"
-  src="./index.js"
+  src="../dist/pages/index.bundle.js"
 ></script>
 
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
   </head>
   <body>
     <header>
-      <section class="flex align-center justify-space-between">
+      <section class="d-flex align-items-center justify-content-between">
         <div class="title">Wakfreeca 실험실</div>
         <button
           id="openGithubIssue"
@@ -32,9 +32,23 @@
         </button>
       </section>
     </header>
-    <main>안뇽하세용</main>
-    <footer class="mt-2">
-      <section class="flex align-center justify-end">
+    <main class="mt-4">
+      <section class="p-2 border rounded border-primary-subtle bg-body-tertiary">
+        <article class="d-flex align-items-center justify-content-between">
+          <div>ㄱㅇㅇ 필터</div>
+          <div class="form-check form-switch custom-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="switchCleanChatter"
+            />
+          </div>
+        </article>
+      </section>
+    </main>
+    <footer class="mt-4">
+      <section class="d-flex align-items-center justify-content-end">
         <button
           id="copyEmail"
           class="btn btn-secondary"
