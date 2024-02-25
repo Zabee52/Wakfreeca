@@ -31,3 +31,7 @@ export interface AfreecaTvUserListItem {
   flag2: number
   genderForUserList: string
 }
+
+export interface Feature {
+  [key: string]: boolean
+}
