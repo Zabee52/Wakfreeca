@@ -15,13 +15,12 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(function () {
         copyEmailButton.classList.remove('btn-secondary')
         copyEmailButton.classList.add('btn-success')
-        const prevText = copyEmailButton.textContent
         copyEmailButton.textContent = '복사 완료!'
 
         setTimeout(() => {
           copyEmailButton.classList.remove('btn-success')
           copyEmailButton.classList.add('btn-secondary')
-          copyEmailButton.textContent = prevText
+          copyEmailButton.textContent = '개발자에게 항의하고 싶다면 : zabeee52@gmail.com'
         }, 3000)
       })
       .catch(function (err) {
