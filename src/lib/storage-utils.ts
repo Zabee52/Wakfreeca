@@ -14,3 +14,10 @@ export function storageLocalBoolean({ key, value }: { key: string; value: boolea
   return chrome.storage.local.set({ [key]: value })
 }
 
+export async function setStorageLocal<T = any>(key: string, value: T) {
+  return new Promise<void>((resolve) => {
+    chrome.storage.local.set({ [key]: value }, () => {
+      resolve()
+    })
+  })
+}
