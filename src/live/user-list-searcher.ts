@@ -28,12 +28,7 @@ const userListSearcherInit = async () => {
     return
   }
 
-  const searchInput = document.createElement('input')
-  searchInput.setAttribute('id', 'searchInput')
-  searchInput.setAttribute('type', 'text')
-  searchInput.setAttribute('placeholder', '닉네임 검색')
-  searchInput.setAttribute('autocomplete', 'off')
-
+  const searchInput = createSearchInput()
   searchInput.addEventListener('input', (event) => {
     const target = event.target as HTMLInputElement
     if (!target.value) {
@@ -100,6 +95,16 @@ const createSimpleSpan = (textContent: string) => {
   const span = document.createElement('span')
   span.textContent = textContent
   return span
+}
+
+const createSearchInput = () => {
+  const searchInput = document.createElement('input')
+  searchInput.setAttribute('id', 'searchInput')
+  searchInput.setAttribute('type', 'text')
+  searchInput.setAttribute('placeholder', '닉네임 검색')
+  searchInput.setAttribute('autocomplete', 'off')
+
+  return searchInput
 }
 
 userListSearcherInit()
