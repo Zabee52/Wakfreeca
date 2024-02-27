@@ -32,6 +32,18 @@ document.addEventListener('DOMContentLoaded', function () {
   cleanChatterSwitch.addEventListener('change', () => {
     FeatureLab.setAndPropagation('cleanChatter', cleanChatterSwitch.checked)
   })
+  const cuteFilterSwitch = document.getElementById('switchCuteFilter') as HTMLInputElement
+  cuteFilterSwitch.addEventListener('change', () => {
+    FeatureLab.setAndPropagation('cuteFilter', cuteFilterSwitch.checked)
+  })
+  const eeFilterSwitch = document.getElementById('switchEeFilter') as HTMLInputElement
+  eeFilterSwitch.addEventListener('change', () => {
+    FeatureLab.setAndPropagation('eeFilter', eeFilterSwitch.checked)
+  })
+  const kiaFilterSwitch = document.getElementById('switchKiaFilter') as HTMLInputElement
+  kiaFilterSwitch.addEventListener('change', () => {
+    FeatureLab.setAndPropagation('kiaFilter', kiaFilterSwitch.checked)
+  })
 
   init()
 })
@@ -43,5 +55,17 @@ const init = async () => {
   if (FeatureLab.getFeatureEnabled('cleanChatter')) {
     const cleanChatterSwitch = document.getElementById('switchCleanChatter') as HTMLInputElement
     cleanChatterSwitch.checked = FeatureLab.getFeatureEnabled('cleanChatter')
+  }
+  if (FeatureLab.getFeatureEnabled('cuteFilter')) {
+    const cuteFilterSwitch = document.getElementById('switchCuteFilter') as HTMLInputElement
+    cuteFilterSwitch.checked = FeatureLab.getFeatureEnabled('cuteFilter')
+  }
+  if (FeatureLab.getFeatureEnabled('eeFilter')) {
+    const eeFilterSwitch = document.getElementById('switchEeFilter') as HTMLInputElement
+    eeFilterSwitch.checked = FeatureLab.getFeatureEnabled('eeFilter')
+  }
+  if (FeatureLab.getFeatureEnabled('kiaFilter')) {
+    const kiaFilterSwitch = document.getElementById('switchKiaFilter') as HTMLInputElement
+    kiaFilterSwitch.checked = FeatureLab.getFeatureEnabled('kiaFilter')
   }
 }

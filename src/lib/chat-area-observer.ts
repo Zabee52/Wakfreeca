@@ -1,9 +1,9 @@
 import { isChat, isDonation, isNotice } from './afreeca-utils'
-import { cleanChat } from './clean-chatter'
+import { isCleaningTarget } from './clean-chatter'
+
 import displayDonation from './display-donation'
 import displayIcon from './display-icon'
 import displayNotice from './display-notice'
-import FeatureLab from './feature-lab'
 
 export const getChatAreaObserver = () => {
   const callback = function (mutationsList: MutationRecord[], observer: MutationObserver) {
@@ -24,7 +24,8 @@ export const getChatAreaObserver = () => {
 
         if (isChat(mutateTargetNode)) {
           // FIXME: remove adhoc
-          if (FeatureLab.getFeatureEnabled('cleanChatter') && cleanChat(mutateTargetNode, node)) {
+          if (isCleaningTarget(mutateTargetNode)) {
+            node.remove()
             return
           }
           displayIcon(mutateTargetNode)

@@ -1,15 +1,20 @@
-const isCleaningTarget = (message: string | null) => {
+import FeatureLab from './feature-lab'
+
+const isCleaningPolicyViolated = (message: string | null) => {
   if (!message) {
     return false
   }
-  return message.startsWith('ㄱㅇㅇ') || message.length === 1 || message === 'ㄹㅇ' || message.startsWith('ㅋㅋㅋㅋㅋ')
+  const isCuteFilter = FeatureLab.getFeatureEnabled('cuteFilter') && (message === 'ㄱㅇㅇ' || message === 'ㄱㅇㅇㅇ')
+  const isEeFilter = FeatureLab.getFeatureEnabled('eeFilter') && message.startsWith('ㅔㅔ')
+  const isKiaFilter = FeatureLab.getFeatureEnabled('kiaFilter') && message.startsWith('캬ㅑ')
+  const isCleanChatter =
+    FeatureLab.getFeatureEnabled('cleanChatter') && (message.length === 1 || message.startsWith('ㅋㅋㅋㅋㅋ'))
+
+    console.log(isCuteFilter || isEeFilter || isKiaFilter || isCleanChatter)
+  return isCuteFilter || isEeFilter || isKiaFilter || isCleanChatter
 }
 
-export const cleanChat = (mutateTargetNode: HTMLElement, removeTagetNode: HTMLElement) => {
+export const isCleaningTarget = (mutateTargetNode: HTMLElement) => {
   const message = mutateTargetNode.querySelector('.msg')?.textContent ?? null
-  if (!isCleaningTarget(message)) {
-    return false
-  }
-  removeTagetNode.remove()
-  return true
+  return isCleaningPolicyViolated(message)
 }
