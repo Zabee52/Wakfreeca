@@ -16,7 +16,8 @@ CHAT_LAYER_SET_DISPLAY_DONATION_MESSAGES.forEach((message) => {
 
 export default (observeTarget: HTMLElement, removeTarget: HTMLElement) => {
   const isBalloon = observeTarget.classList.length === 1 // 별풍선은 별도의 클래스를 가지지 않음
-  if (isBalloon && !donationDisplayMap[ID_DONATION_BALLOON]) {
+  const isChallangeBalloon = observeTarget.classList.contains('basic')
+  if ((isBalloon || isChallangeBalloon) && !donationDisplayMap[ID_DONATION_BALLOON]) {
     removeTarget.remove()
     return
   }
