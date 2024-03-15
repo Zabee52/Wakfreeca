@@ -45,8 +45,6 @@
   ![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/f3ab9098-a830-4e04-bd7b-37d3bb4f86ac)
   ![image](https://github.com/Zabee52/Wakfreeca/assets/93498724/8fd624ac-644a-4ba2-9102-286fd326ba6e)
 
-- 알려진 문제 : 시청자 유동이 너무 많을 경우 검색을 한 뒤 아무 동작도 취하지 않았을 때 서비스에서 자동으로 새로고침을 시도, 전체 목록으로 되돌아가는 이슈가 있습니다. 다음 패치에 해결될 예정입니다.
-
 ### v2.0.0
 - 기존 기능들이 새로운 UI에 맞춰 재활성화 되었습니다.
 
