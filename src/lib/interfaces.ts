@@ -35,3 +35,9 @@ export interface AfreecaTvUserListItem {
 export interface Feature {
   [key: string]: boolean
 }
+
+export interface ChatFilterItem {
+  exactMatch: string[]
+  includeMatch: string[]
+  startsWithMatch: string[]
+}

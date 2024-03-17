@@ -23,7 +23,6 @@ export const getChatAreaObserver = () => {
         }
 
         if (isChat(mutateTargetNode)) {
-          // FIXME: remove adhoc
           if (isCleaningTarget(mutateTargetNode)) {
             node.remove()
             return
