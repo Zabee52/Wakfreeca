@@ -145,7 +145,7 @@ const createBadge = (type: keyof ChatFilterItem, text: string) => {
 
 const createListGroup = (id?: string) => {
   const listGroup = document.createElement('div')
-  listGroup.classList.add('mt-2', 'd-flex', 'gap-2')
+  listGroup.classList.add('mt-2', 'd-flex', 'gap-2', 'flex-wrap')
 
   if (id) {
     listGroup.id = id
