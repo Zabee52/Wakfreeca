@@ -1,11 +1,6 @@
 body {
   width: 400px;
-  padding: 16px;
   background-color: #f2efe5;
-}
-
-.mt-2 {
-  margin-top: 8px;
 }
 
 .title {
