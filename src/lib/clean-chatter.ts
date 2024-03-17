@@ -1,17 +1,17 @@
-import FeatureLab from './feature-lab'
+import ChatFilter from './chat-filter'
+import { ChatFilterItem } from './interfaces'
 
 const isCleaningPolicyViolated = (message: string | null) => {
   if (!message) {
     return false
   }
-  const isCuteFilter = FeatureLab.getFeatureEnabled('cuteFilter') && (message === 'ㄱㅇㅇ' || message === 'ㄱㅇㅇㅇ')
-  const isEeFilter = FeatureLab.getFeatureEnabled('eeFilter') && message.startsWith('ㅔㅔ')
-  const isKiaFilter = FeatureLab.getFeatureEnabled('kiaFilter') && message.startsWith('캬ㅑ')
-  const isCleanChatter =
-    FeatureLab.getFeatureEnabled('cleanChatter') && (message.length === 1 || message.startsWith('ㅋㅋㅋㅋㅋ'))
-
-    console.log(isCuteFilter || isEeFilter || isKiaFilter || isCleanChatter)
-  return isCuteFilter || isEeFilter || isKiaFilter || isCleanChatter
+  for (const key in ChatFilter.chatFilterItem) {
+    if (!ChatFilter.validate(key as keyof ChatFilterItem, message)) {
+      continue
+    }
+    return true
+  }
+  return false
 }
 
 export const isCleaningTarget = (mutateTargetNode: HTMLElement) => {

@@ -54,7 +54,8 @@ export const CHAT_LAYER_SET_DISPLAY_NOTICE_MESSAGES = [
   ID_NOTICE_SUPPORTER,
 ]
 
-function withPrefix(prefix: string, str: string) {
+export const ID_CHAT_FILTER_PREFIX = 'chat_filter'
+export function withPrefix(prefix: string, str: string) {
   return `${prefix}_${str}`
 }
 

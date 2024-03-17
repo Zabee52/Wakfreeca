@@ -21,3 +21,11 @@ export async function setStorageLocal<T = any>(key: string, value: T) {
     })
   })
 }
+
+export async function removeStorageLocal(key: string) {
+  return new Promise<void>((resolve) => {
+    chrome.storage.local.remove(key, () => {
+      resolve()
+    })
+  })
+}
