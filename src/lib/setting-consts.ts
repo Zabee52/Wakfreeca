@@ -9,7 +9,6 @@ import {
   ID_DONATION_BALLOON,
   ID_DONATION_AD_BALLOON,
   ID_DONATION_STICKER,
-  ID_NOTICE_VIP_ENTER,
   ID_NOTICE_VIP,
   ID_NOTICE_FAN,
   ID_NOTICE_SUPPORTER,
@@ -66,10 +65,6 @@ export const chatLayerSetDisplayDonationItems: Record<string, SettingItem> = {
 }
 
 export const chatLayerSetNoticeItems: Record<string, SettingItem> = {
-  [ID_NOTICE_VIP_ENTER]: {
-    type: 'checkbox',
-    text: '열혈팬 입장 알림',
-  },
   [ID_NOTICE_VIP]: {
     type: 'checkbox',
     text: '열혈팬 탄생 알림',

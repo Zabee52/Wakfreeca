@@ -42,13 +42,11 @@ export const CHAT_LAYER_SET_DISPLAY_DONATION_MESSAGES = [
 ]
 
 // Chat layer set display notice items
-export const ID_NOTICE_VIP_ENTER = withPrefix(ID_CHAT_LAYER_SET_DISPLAY_NOTICE, 'vip_enter')
 export const ID_NOTICE_VIP = withPrefix(ID_CHAT_LAYER_SET_DISPLAY_NOTICE, 'vip')
 export const ID_NOTICE_FAN = withPrefix(ID_CHAT_LAYER_SET_DISPLAY_NOTICE, 'fan')
 export const ID_NOTICE_SUPPORTER = withPrefix(ID_CHAT_LAYER_SET_DISPLAY_NOTICE, 'supporter')
 
 export const CHAT_LAYER_SET_DISPLAY_NOTICE_MESSAGES = [
-  ID_NOTICE_VIP_ENTER,
   ID_NOTICE_VIP,
   ID_NOTICE_FAN,
   ID_NOTICE_SUPPORTER,

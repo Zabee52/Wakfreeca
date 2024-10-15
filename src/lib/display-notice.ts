@@ -3,7 +3,6 @@ import {
   ID_NOTICE_FAN,
   ID_NOTICE_SUPPORTER,
   ID_NOTICE_VIP,
-  ID_NOTICE_VIP_ENTER,
 } from './consts'
 import { getStorageLocalBoolean } from './storage-utils'
 
@@ -17,11 +16,6 @@ CHAT_LAYER_SET_DISPLAY_NOTICE_MESSAGES.forEach((message) => {
 export default (observeTarget: HTMLElement, removeTarget: HTMLElement) => {
   const message = observeTarget.querySelector('p')
   if (!message) {
-    return
-  }
-  const isEnterVip = message?.textContent?.includes('대화방에 참여했습니다.')
-  if (isEnterVip && !noticeDisplayMap[ID_NOTICE_VIP_ENTER]) {
-    removeTarget.remove()
     return
   }
 

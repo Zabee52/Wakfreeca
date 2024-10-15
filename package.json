@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production"
+    "build": "vite build"
   },
   "repository": {
     "type": "git",
@@ -22,8 +22,15 @@
     "@types/chrome": "^0.0.254",
     "clean-webpack-plugin": "^4.0.0",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.3.3",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4"
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "^5.1.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "vite": "^5.4.9",
+    "vue": "^3.5.12",
+    "vue-router": "^4.4.5"
   }
 }
