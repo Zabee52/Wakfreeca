@@ -1,17 +1,17 @@
 <p align="center">
   <img src="https://github.com/Zabee52/Wakfreeca/assets/93498724/a662f369-335a-4c77-99fc-ab3e3467744f" height="96">
-  <h3 align="center">Wakfreeca</h3>
+  <h3 align="center">Waksoop</h3>
 </p>
 
 <p align="center">
-  아프리카TV를 조금 더 멋지게 사용하기 위한 작은 도구
+  SOOP을 조금 더 멋지게 사용하기 위한 작은 도구
 </p>
 
 <br/>
 
-## Wakfreeca
+## Waksoop
 
-아프리카TV의 기능을 보조하는 chrome extension입니다.
+SOOP의 기능을 보조하는 chrome extension입니다.
 
 ## 사용 방법
 
@@ -27,6 +27,12 @@
 - 레이아웃의 변경과 관련한 작업만 수행하는 크롬 익스텐션으로, __어떠한 정보도 외부에 수집되지 않습니다.__
 
 ## 업데이트 기록
+
+### v2.3.0
+- SOOP 지원을 위한 작업 중입니다.
+  - 현재 채팅 필터링 기능만 동작합니다.
+    - 채팅 필터링 리스트가 초기화 되었습니다. 번거롭겠지만 다시 설정 부탁드립니다. 리스트가 URL 단위로 관리되는 기능 특성상 불가피한 점 양해 부탁드립니다.
+  - 기타 기능은 UI 재배치와 함께 작업 중입니다.
 
 ### v2.2.0
 - 실험실에 채팅창 필터링 커스텀 기능을 추가했습니다. 특정 조건에 따라 채팅을 표시하지 않도록 설정할 수 있습니다.
