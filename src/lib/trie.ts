@@ -13,6 +13,9 @@ export class Trie<T = any> {
   }
 
   insert(key: string, value: T) {
+    if (!key) {
+      return
+    }
     let node = this.root
     for (const char of key) {
       node.children[char] = node.children[char] || { children: {} }

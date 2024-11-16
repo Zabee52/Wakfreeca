@@ -7,21 +7,15 @@ declare const window: any
 
 let viewerListCalled = false
 
-export const getConnectedLiveView = async (retry: number = DEFAULT_RETRY_LIMIT): Promise<any> => {
+export const getConnectedLiveView = async (): Promise<any> => {
   if (!window.liveView) {
     throw new Error('liveView not found')
   }
 
-  if (!retry) {
-    console.log('getConnectedLiveView(): retry limit exceeded')
-    return null
+  if (!window.liveView?.playerController?.getLivePlayer?.()?.chatSocket?.isConnected) {
+    throw new Error('chat server connected yet.')
   }
 
-  if (!window.liveView?.playerController?.getLivePlayer?.()?.chatSocket?.isConnected) {
-    console.log('chat server connected yet. retry, remaining:', --retry)
-    await delay(1000)
-    return getConnectedLiveView(retry)
-  }
   return window.liveView
 }
 

@@ -1,3 +1,4 @@
+import { funcWithRetry } from './common-utils'
 import { UserInformation } from './interfaces'
 import { getConnectedLiveView, getCurrentViewerList } from './live-view-utils'
 import { TrieFactory } from './trie-factory'
@@ -15,7 +16,7 @@ const ingest = (grade: string, nickname: string, userId: string) => {
 }
 
 export const indexUserList = async () => {
-  const liveView = await getConnectedLiveView()
+  const liveView = await funcWithRetry(getConnectedLiveView, 120)
   if (!liveView?.playerController?.sendChUser) {
     throw new Error('liveView not found')
   }
