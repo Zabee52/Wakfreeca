@@ -1,3 +1,4 @@
+import { funcWithRetry } from '../lib/common-utils'
 import { cleanChildNodes } from '../lib/dom-utils'
 import { UserInformation } from '../lib/interfaces'
 import { Trie } from '../lib/trie'
@@ -13,19 +14,19 @@ const userListSearcherInit = async () => {
 
   const appendTarget = document.getElementById('list_viewer')
   if (!appendTarget) {
-    return
+    throw new Error('appendTarget not found')
   }
   const userListNode = appendTarget.querySelector('#userList')
   if (!userListNode) {
-    return
+    throw new Error('userListNode not found')
   }
   const effectiveBoxNode = userListNode.querySelector('.effective_box')
   if (!effectiveBoxNode) {
-    return
+    throw new Error('effectiveBoxNode not found')
   }
   const effectiveList = effectiveBoxNode.querySelector('.effective_list') as HTMLElement
   if (!effectiveList) {
-    return
+    throw new Error('effectiveList not found')
   }
 
   const searchInput = createSearchInput()
@@ -107,7 +108,7 @@ const createSearchInput = () => {
   return searchInput
 }
 
-userListSearcherInit()
+funcWithRetry(userListSearcherInit, 300)
 
 const indexInterval = setInterval(async () => {
   userList = await indexUserList()
